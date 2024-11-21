@@ -1,3 +1,45 @@
+## GATES
+
+"""
+Gates script:
+=============
+
+- Provides a class of standard gates for 1 and 2 qubits.
+- Allows for custom gate creation, and scales to unitary if necessary.
+- Allows for controlled-gate for any gate.
+- Can perform tensor product of gates.
+
+Dependencies:
+~~~~~~~~~~~~~
+- numpy
+
+Built-in 1 qubit gates:
+~~~~~~~~~~~~~~~~~~~~~~~
+
+- X_gate: X gate.
+- Y_gate: Y gate.
+- Z_gate: Z gate.
+- H_gate: Hadamard gate.
+- S_gate: S gate.
+- T_gate: T gate.
+
+
+Built-in 2 qubit gates:
+~~~~~~~~~~~~~~~~~~~~~~~
+
+- CNOT_gate2(control): CNOT gate with specified control.
+- SWAP_gate2: SWAP gate.
+- HH_gate2: double Hadamard gate (Hadamard on each qubit).
+- FT_gate2: Quantum Fourier Transform gate on 2 qubits.
+
+Example for calling gates:
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+x       = gates.X_gate          # produces instance of an X gate.
+cnot1   = gates.CNOT_gate2(1)   # produces instance of a CNOT gate with control on the first qubit.
+
+"""
+
 import numpy as np
 
 class Gate(object):
@@ -57,7 +99,6 @@ def create_gate(num_qubits, array):
     
     gate = Gate(num_qubits, array)
 
-    ### Move these tests outside of initiation: move to generation of a U gate
     # Array must contain ints, floats or complex numbers.
     try:
         np.sum(gate.array)
@@ -158,7 +199,7 @@ def CNOT_gate2(control):
         raise ValueError('The control must be 1 or 2 for a 2-qubit system.')
     
 
-### how do I docstring constants?
+### how do I docstring constants properly?
 
 X_gate = Gate(1, [[0,1],[1,0]])
 Y_gate = Gate(1, [[0,-1j],[1j,0]])
@@ -167,8 +208,8 @@ H_gate = Gate(1, np.array([[1,1],[1,-1]])/np.sqrt(2))
 S_gate = Gate(1, [[1,0],[0,1j]])
 T_gate = Gate(1, [[1,0],[0,(1+1j)/np.sqrt(2)]])
 SWAP_gate2 = Gate(2, [[1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]])
-HH_gate = Gate(2, 0.5 * np.array([[1,1,1,1],[1,-1,1,-1],[1,1,-1,-1],[1,-1,-1,1]]))
-FT_gate = Gate(2, 0.5 * np.array([[1,1,1,1],[1,1j,-1,-1j],[1,-1,1,-1],[1,-1j,-1,1j]]))
+HH_gate2 = Gate(2, 0.5 * np.array([[1,1,1,1],[1,-1,1,-1],[1,1,-1,-1],[1,-1,-1,1]]))
+FT_gate2 = Gate(2, 0.5 * np.array([[1,1,1,1],[1,1j,-1,-1j],[1,-1,1,-1],[1,-1j,-1,1j]]))
 
 
 
