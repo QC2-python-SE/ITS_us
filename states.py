@@ -70,7 +70,7 @@ class states:
         
         #Checks if length of the state for N qubits is 2^N
         if len(coef_list) != 2**N:
-            raise TypeError("Length of initial states list for N qubits doesn't equal 2^N.")
+            raise TypeError("The length of initial states list for " + str(N) + " qubit(s) is not " + str(len(coef_list))+ ". It should be equal to " + str(2**N) +".")
 
 
         coef_arr = np.array(coef_list)
@@ -211,3 +211,4 @@ state = states()
 #Check
 print(state.coef([1,8],1))
 print(state.Minus())
+#print(state.coef([1,8,3],1))
