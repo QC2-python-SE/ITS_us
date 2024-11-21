@@ -245,7 +245,7 @@ state = states()
 print(state.norm_init([1,8],1))
 print(state.Minus())
 print(state.tp([[2,7],[4,5]]))
-print(state.tp([state.Zero(), state.One()]))
+print(state.tp([state.Zero(), state.One()]))    
 
 #Error Check
 #print(state.tp([[2,"f"],[4,5]]))

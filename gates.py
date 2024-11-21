@@ -32,7 +32,7 @@ class Gate(object):
         """
         copy = np.copy(self.array)
         return copy
-
+        
 
 def tensorprod(gate_list):
     """
