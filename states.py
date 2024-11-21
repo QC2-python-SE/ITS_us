@@ -250,3 +250,5 @@ print(state.tp([state.Zero(), state.One()]))
 #Error Check
 #print(state.tp([[2,"f"],[4,5]]))
 #print(state.tp([[2,7,3],[4,5]]))
+
+
