@@ -26,14 +26,19 @@ class Circuits:
         self.states = States()
         self.gates = []
         
-    def add_gate(self, gate: Gates, target_wire: int):
+    def add_single_qubit_gate(self, gate: Gates, target_wire: int):
         """
-            Function to add a gate to the circuit operating on the target wire.
+            Function to add a single wubit gate to the circuit at a given wire.
+            Creates a tuple of the gate and the target wire and appends it to the gates list.
 
             Args:
                 gate (Gates): The gate to be added to the circuit.
                 target_wire (int): The wire the gate is to be applied to.
         """
+        if target_wire >= self.N_wires:
+            raise ValueError("target wire must not exceed the number of wires in the circuit.")
+        if gate.get_num_qubits() != 1:
+            raise ValueError("The gate must be a single qubit gate.")
 
         gate_target_tuple = (gate, target_wire)
         self.gates.append(gate_target_tuple)
