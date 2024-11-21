@@ -31,6 +31,15 @@ class Gate(object):
         """
         copy = np.copy(self.array)
         return copy
+    
+    def get_num_qubits(self):
+        """
+        Reads the number of qubits that pass through the gate.
+
+        Returns:
+            int: number of qubits
+        """
+        return self.num_qubits
         
 
 def create_gate(num_qubits, array):
