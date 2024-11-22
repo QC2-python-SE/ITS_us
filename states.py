@@ -41,12 +41,12 @@ import math
 warnings.filterwarnings('ignore')
 
 class states:
-    def __init__(self, state = np.array([[1], [0]]), N = 1):
-        self.state = state
+    def __init__(self, N = 1, state = np.array([[1], [0]])):
         self.N = N
+        self.state = state
 
-    #Inititial Normalised State Function
-    def norm_init(self, coef_list, N):
+    #Initial Normalised State Function
+    def state_norm(self, N, coef_list):
 
         """
         Takes a coefficients list:
@@ -98,7 +98,7 @@ class states:
             else:
                 self.state = norm_state
                 return self.state
-
+            
     #1 qubit states
     def Zero(self):
         """
@@ -119,7 +119,7 @@ class states:
         """
         self.state = np.array([[0], [1]])
         return self.state
-    
+
     def Plus(self):
         """
         This function gives the state: |+> = (|0>+|1>)/sqrt(2).
@@ -129,7 +129,7 @@ class states:
         """
         self.state = (1/math.sqrt(2))*np.array([[1], [1]])
         return self.state
-    
+
     def Minus(self):
         """
         This function gives the state: |-> = (|0>-|1>)/sqrt(2).
@@ -139,7 +139,7 @@ class states:
         """
         self.state = (1/math.sqrt(2))*np.array([[1], [-1]])
         return self.state
-    
+
     def Plus_i(self):
         """
         This function gives the state: |i> = (|0>+i|1>)/sqrt(2).
@@ -149,7 +149,7 @@ class states:
         """
         self.state = (1/math.sqrt(2))*np.array([[1], [complex(0,1)]])
         return self.state
-    
+
     def Minus_i(self):
         """
         This function gives the state: |-i> = (|0>-i|1>)/sqrt(2).
@@ -159,11 +159,11 @@ class states:
         """
         self.state = (1/math.sqrt(2))*np.array([[1], [complex(0,-1)]])
         return self.state
-    
+
     #Bell States (2 qubits)
     zero = np.array([[1], [1]])
     one = np.array([[0], [1]])
-    
+
     def Psi_plus(self):
         """
         This function gives the state: |Psi+> = (|01>+|10>)/sqrt(2).
@@ -173,7 +173,7 @@ class states:
         """
         self.state = (1/math.sqrt(2))*((np.kron(zero, one) + np.kron(one, zero)))
         return self.state
-    
+
     def Psi_minus(self):
         """
         This function gives the state: |Psi-> = (|01>-|10>)/sqrt(2).
@@ -183,7 +183,7 @@ class states:
         """
         self.state = (1/math.sqrt(2))*((np.kron(zero, one) - np.kron(one, zero)))
         return self.state
-    
+
     def Phi_plus(self):
         """
         This function gives the state: |Phi+> = (|00>+|11>)/sqrt(2).
@@ -193,7 +193,7 @@ class states:
         """
         self.state = (1/math.sqrt(2))*((np.kron(zero, zero) + np.kron(one, one)))
         return self.state
-    
+
     def Phi_minus(self):
         """
         This function gives the state: |Psi-> = (|00>-|11>)/sqrt(2).
@@ -203,7 +203,7 @@ class states:
         """
         self.state = (1/math.sqrt(2))*((np.kron(zero, zero) - np.kron(one, one)))
         return self.state
-    
+
     #Tensor Product for only 2 qubits
     #Items in list could be one of the built-in functions (Zero, One). It will be normalised using norm_init.
     def tp(self, lst):
@@ -228,7 +228,7 @@ class states:
 
             for l in lst:
                 #normalise each state within the list using norm_init
-                s = state.norm_init(l,1)
+                s = state.state_norm(1,l)
                 lst_new.append(s)
             #create a tensor product of each item in the list
             new_state = np.kron(lst_new[0],lst_new[1])
@@ -242,10 +242,11 @@ class states:
 state = states()
 
 #Check
-print(state.norm_init([1,8],1))
+print(state.state_norm(1, [1,8]))
 print(state.Minus())
 print(state.tp([[2,7],[4,5]]))
 print(state.tp([state.Zero(), state.One()]))
+
 
 #Error Check
 #print(state.tp([[2,"f"],[4,5]]))
