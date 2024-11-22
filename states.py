@@ -15,21 +15,47 @@ Dependencies:
 Built-in 1 qubit states:
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-- zero state = |0> = [[1],[0]]
-- one state = |1> = [[0],[1]]
-- plus state: |+> = (|0>+|1>)/sqrt(2).
-- minus state: |-> = (|0>-|1>)/sqrt(2).
-- plus_i state: |i> = (|0>+i|1>)/sqrt(2).
-- minus_i state: |-i> = (|0>-i|1>)/sqrt(2).
+- zero state:
+    |0> = [[1],[0]]
+
+- one state:
+    |1> = [[0],[1]]
+
+- plus state: 
+.. math::
+    |+> =  \frac{1}{\sqrt{2}}(|0> + |1>)
+
+- minus state: 
+.. math::
+    |-> =  \frac{1}{\sqrt{2}}(|0> - |1>)
+
+- plus_i state: 
+.. math::
+    |i> =  \frac{1}{\sqrt{2}}(|0> + i|1>)
+
+- minus_i state: 
+.. math::
+    |-i> =  \frac{1}{\sqrt{2}}(|0> - i|1>)
 
 
 Built-in Bell States (2 qubits):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- psi_plus state: |Psi+> = (|01>+|10>)/sqrt(2).
-- psi_minus state: |Psi-> = (|01>-|10>)/sqrt(2).
-- phi_plus state: |Phi+> = (|00>+|11>)/sqrt(2).
-- phi_minus state: |Phi-> = (|01>-|11>)/sqrt(2).
+- psi_plus state: 
+.. math::
+    | \Psi^+ > =  \frac{1}{\sqrt{2}}(|01> + |10>)
+
+- psi_minus state: 
+.. math::
+    | \Psi^- > =  \frac{1}{\sqrt{2}}(|01> - |10>)
+
+- phi_plus state: 
+.. math::
+    | \Phi^+ > =  \frac{1}{\sqrt{2}}(|00> + |11>)
+
+- phi_minus state: 
+.. math::
+    | \Phi^- > =  \frac{1}{\sqrt{2}}(|00> - |11>)
 
 """
 
@@ -142,9 +168,7 @@ class BuiltIn(States):
     @staticmethod
     def minus():
         """
-        This function gives the state: 
-        .. math::
-            |-> =  \frac{1}{\sqrt{2}}(|0> - |1>)
+        This function gives the |-> state.
 
         Returns:
             array : An array of numbers.
@@ -154,9 +178,7 @@ class BuiltIn(States):
     @staticmethod
     def plus_i():
         """
-        This function gives the state: 
-        .. math::
-            |i> =  \frac{1}{\sqrt{2}}(|0> + i|1>)
+        This function gives the |i> state. 
 
         Returns:
             array : An array of complex numbers.
@@ -166,9 +188,7 @@ class BuiltIn(States):
     @staticmethod
     def minus_i():
         """
-        This function gives the state: 
-        .. math::
-            |i> =  \frac{1}{\sqrt{2}}(|0> - i|1>)
+        This function gives the |-i> state: 
 
         Returns:
             array : An array of complex numbers.
@@ -178,9 +198,7 @@ class BuiltIn(States):
     #Bell States (2 qubits)
     def psi_plus(self):
         """
-        This function gives the state: 
-        .. math::
-            | \Psi^+ > =  \frac{1}{\sqrt{2}}(|01> + |10>)
+        This function gives the :math:'| \Psi^+ >' state.
 
         Returns:
             array : An array of numbers.
@@ -189,9 +207,7 @@ class BuiltIn(States):
 
     def psi_minus(self):
         """
-        This function gives the state:
-        .. math::
-            | \Psi^- > =  \frac{1}{\sqrt{2}}(|01> - |10>)
+        This function gives the :math:'| \Psi^- >' state.
 
         Returns:
             array : An array of numbers.
@@ -200,9 +216,7 @@ class BuiltIn(States):
 
     def phi_plus(self):
         """
-        This function gives the state: 
-        .. math::
-            | \Phi^+ > =  \frac{1}{\sqrt{2}}(|00> + |11>)
+        This function gives the :math:'| \Phi^+ >' state.
 
         Returns:
             array : An array of numbers.
@@ -211,9 +225,7 @@ class BuiltIn(States):
 
     def phi_minus(self):
         """
-        This function gives the state:
-        .. math::
-            | \Phi^- > =  \frac{1}{\sqrt{2}}(|00> - |11>)
+        This function gives the :math:'| \Phi^- >' state.
 
         Returns:
             array : An array of complex numbers.
