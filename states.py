@@ -255,9 +255,11 @@ state = States()
 bis = BuiltIn()
 
 #Check
+state1 = state.norm(1, [3,5])
+state2 = state.norm(1, [8,2])
 print(state.norm(1, [1,8]))
 print(bis.minus())
-print(tp([2,7],[4,5]))
+print(tp(state1, state2))
 print(tp(bis.zero(), bis.one()))
 print(bis.one())
 print(bis.psi_plus())
