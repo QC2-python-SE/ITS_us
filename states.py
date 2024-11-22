@@ -40,7 +40,7 @@ import math
 # Ignore warnings for clean output
 warnings.filterwarnings('ignore')
 
-class states:
+class States:
     def __init__(self, N = 1, state = np.array([[1], [0]])):
         self.N = N
         self.state = state
@@ -99,110 +99,126 @@ class states:
                 self.state = norm_state
                 return self.state
             
+
+
+
+class BuiltIn(States):
+    def __init__(self, N = 1, state = np.array([[1], [0]])):
+        super().__init__(N, state)
+    
     #1 qubit states
-    def zero(self):
+    @staticmethod
+    def zero():
         """
         This function gives the |0> = [[1],[0]] state.
 
         Returns:
             array : An array of numbers.
         """
-        self.state = np.array([[1], [0]])
-        return self.state
-
-    def one(self):
+        return np.array([[1], [0]])
+    
+    @staticmethod
+    def one():
         """
-        This function gives the state: |1> = [[0],[1]].
-
-        Returns:
-            array : An array of numbers.
-        """
-        self.state = np.array([[0], [1]])
-        return self.state
-
-    def plus(self):
-        """
-        This function gives the state: |+> = (|0>+|1>)/sqrt(2).
+        This function gives the |1> = [[0],[1]] state.
 
         Returns:
             array : An array of numbers.
         """
-        self.state = (1/math.sqrt(2))*np.array([[1], [1]])
-        return self.state
+        return np.array([[0], [1]])
 
-    def minus(self):
+    @staticmethod
+    def plus():
         """
-        This function gives the state: |-> = (|0>-|1>)/sqrt(2).
+        This function gives the state:
+        .. math::
+            |+> =  \frac{1}{\sqrt{2}}(|0> + |1>)
 
         Returns:
             array : An array of numbers.
         """
-        self.state = (1/math.sqrt(2))*np.array([[1], [-1]])
-        return self.state
-
-    def plus_i(self):
+        return (1/math.sqrt(2))*np.array([[1], [1]])
+    
+    @staticmethod
+    def minus():
         """
-        This function gives the state: |i> = (|0>+i|1>)/sqrt(2).
+        This function gives the state: 
+        .. math::
+            |-> =  \frac{1}{\sqrt{2}}(|0> - |1>)
+
+        Returns:
+            array : An array of numbers.
+        """
+        return (1/math.sqrt(2))*np.array([[1], [-1]])
+    
+    @staticmethod
+    def plus_i():
+        """
+        This function gives the state: 
+        .. math::
+            |i> =  \frac{1}{\sqrt{2}}(|0> + i|1>)
 
         Returns:
             array : An array of complex numbers.
         """
-        self.state = (1/math.sqrt(2))*np.array([[1], [complex(0,1)]])
-        return self.state
-
-    def minus_i(self):
+        return (1/math.sqrt(2))*np.array([[1], [complex(0,1)]])
+    
+    @staticmethod
+    def minus_i():
         """
-        This function gives the state: |-i> = (|0>-i|1>)/sqrt(2).
+        This function gives the state: 
+        .. math::
+            |i> =  \frac{1}{\sqrt{2}}(|0> - i|1>)
 
         Returns:
             array : An array of complex numbers.
         """
-        self.state = (1/math.sqrt(2))*np.array([[1], [complex(0,-1)]])
-        return self.state
+        return (1/math.sqrt(2))*np.array([[1], [complex(0,-1)]])
 
     #Bell States (2 qubits)
-    Zero = np.array([[1], [1]])
-    One = np.array([[0], [1]])
-
     def psi_plus(self):
         """
-        This function gives the state: |Psi+> = (|01>+|10>)/sqrt(2).
+        This function gives the state: 
+        .. math::
+            | \Psi^+ > =  \frac{1}{\sqrt{2}}(|01> + |10>)
 
         Returns:
             array : An array of numbers.
         """
-        self.state = (1/math.sqrt(2))*((np.kron(state.zero(), state.one()) + np.kron(state.one(), state.zero())))
-        return self.state
+        return (1/math.sqrt(2))*((np.kron(self.zero(), self.one()) + np.kron(self.one(), self.zero())))
 
     def psi_minus(self):
         """
-        This function gives the state: |Psi-> = (|01>-|10>)/sqrt(2).
+        This function gives the state:
+        .. math::
+            | \Psi^- > =  \frac{1}{\sqrt{2}}(|01> - |10>)
 
         Returns:
             array : An array of numbers.
         """
-        self.state = (1/math.sqrt(2))*((np.kron(state.zero(), state.one()) - np.kron(state.one(), state.zero())))
-        return self.state
+        return (1/math.sqrt(2))*((np.kron(self.zero(), self.one()) - np.kron(self.one(), self.zero())))
 
     def phi_plus(self):
         """
-        This function gives the state: |Phi+> = (|00>+|11>)/sqrt(2).
+        This function gives the state: 
+        .. math::
+            | \Phi^+ > =  \frac{1}{\sqrt{2}}(|00> + |11>)
 
         Returns:
             array : An array of numbers.
         """
-        self.state = (1/math.sqrt(2))*((np.kron(state.zero(), state.zero()) + np.kron(state.one(), state.one())))
-        return self.state
+        return (1/math.sqrt(2))*(np.kron(self.zero(), self.zero()) + np.kron(self.one(), self.one()))
 
     def phi_minus(self):
         """
-        This function gives the state: |Psi-> = (|00>-|11>)/sqrt(2).
+        This function gives the state:
+        .. math::
+            | \Phi^- > =  \frac{1}{\sqrt{2}}(|00> - |11>)
 
         Returns:
             array : An array of complex numbers.
         """
-        self.state = (1/math.sqrt(2))*((np.kron(state.zero(), state.zero()) - np.kron(state.one(), state.one())))
-        return self.state
+        return (1/math.sqrt(2))*((np.kron(self.zero(), self.zero()) - np.kron(self.one(), self.one())))
 
 #Tensor Product for only 2 qubits
 #State_1 and State_2 could be one of the built-in functions (zero, one); otherwise, it will be normalised using norm.
@@ -234,14 +250,17 @@ def tp(state_1, state_2):
         
 
 #Calling states
-state = states()
+state = States()
+#Calling subclass (Built-in states)
+bis = BuiltIn()
 
 #Check
 print(state.norm(1, [1,8]))
-#print(state.minus())
+print(bis.minus())
 print(tp([2,7],[4,5]))
-#print(state.tp([state.zero(), state.one()]))
-
+print(tp(bis.zero(), bis.one()))
+print(bis.one())
+print(bis.psi_plus())
 
 #Error Check
 #print(state.tp([[2,"f"],[4,5]]))
