@@ -46,7 +46,7 @@ class states:
         self.state = state
 
     #Initial Normalised State Function
-    def state_norm(self, N, coef_list):
+    def norm(self, N, coef_list):
 
         """
         Takes a coefficients list:
@@ -204,37 +204,32 @@ class states:
         self.state = (1/math.sqrt(2))*((np.kron(state.zero(), state.zero()) - np.kron(state.one(), state.one())))
         return self.state
 
-    #Tensor Product for only 2 qubits
-    #Items in list could be one of the built-in functions (Zero, One). It will be normalised using norm_init.
-    def tp(self, lst):
-        """
-        Takes an input of two lists of length 2:
-            1. Checks if the length of a list for 2 qubits is 4.
-            2. Applies norm_init function to normalise each state within list and check for errors.
-            3. Returns the tensor product of the given two states.
+#Tensor Product for only 2 qubits
+#State_1 and State_2 could be one of the built-in functions (zero, one); otherwise, it will be normalised using norm.
+def tp(state_1, state_2):
+    """
+    Takes an input of two states of length 2:
+        1. Checks if the length of each state is 2.
+        2. Applies norm function to normalise each state within list and check for errors.
+        3. Returns the tensor product of the given two states.
 
-        Args:
-            lst (list): Two initial states lists.
+    Args:
+        lst (list): Two initial states lists.
 
-        Returns:
-            array: A normalised initial tensor product array of complex numbers for 2 qubits.
+    Returns:
+        array: A normalised initial tensor product array of complex numbers for 2 qubits.
 
-        """
-        #Check length of list
-        if (len(lst[0])+ len(lst[1])) == 4:
-
-            #New list of normalised states to tensor product
-            lst_new = []
-
-            for l in lst:
-                #normalise each state within the list using norm_init
-                s = state.state_norm(1,l)
-                lst_new.append(s)
-            #create a tensor product of each item in the list
-            new_state = np.kron(lst_new[0],lst_new[1])
-        else:
-            raise TypeError("The length of initial states list for 2 qubits is not " + str(len(lst[0])+len(lst[1]))+ ". It should be equal to 4.")
-        return new_state
+    """
+    #Checks length of list
+    if len(state_1) == 2 and len(state_2) == 2:
+        #Normalised states 1 and 2
+        s1 = state.norm(1, state_1)
+        s2 = state.norm(1, state_2)
+        #Create a tensor product of each item in the list
+        tp_state = np.kron(s1, s2)
+    else:
+        raise TypeError("The length of each initial state list for states 1 and 2 should be 2.")
+    return tp_state
 
         
 
@@ -242,10 +237,10 @@ class states:
 state = states()
 
 #Check
-print(state.state_norm(1, [1,8]))
-print(state.minus())
-print(state.tp([[2,7],[4,5]]))
-print(state.tp([state.zero(), state.one()]))
+print(state.norm(1, [1,8]))
+#print(state.minus())
+print(tp([2,7],[4,5]))
+#print(state.tp([state.zero(), state.one()]))
 
 
 #Error Check
