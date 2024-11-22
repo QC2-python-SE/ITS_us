@@ -157,6 +157,31 @@ def CNOT_gate2(control):
     else:
         raise ValueError('The control must be 1 or 2 for a 2-qubit system.')
     
+###COMMENTS FOR THEO (delete at some point)
+# class CNOT(Gate):
+#     def __init__(self, control=0):
+#         super().__init__(num_qubits=2)#, [[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]])
+#         if control == 0:
+#             self.array =  [[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]]
+#         elif control == 1:
+#              self.array =  [[1,0,0,0],[0,1,0,1],[0,0,1,0],[0,1,100,1]]
+
+
+#ideally we should want a class that you could call like this:
+
+# cnot_gate_01 =  CNOT(control= 0)
+# cnot_gate_01.get_array()
+# cnot_gate_01.get_num_qubits()
+
+
+# cnot_gate_10 = CNOT(control=1)
+
+# cnot_gate_10.get_array()
+
+# class GenRotation(Gate):
+#     def __init__(self, theta, phi):
+#         super().__init__(1)#, [[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]])
+        
 
 ### how do I docstring constants?
 
