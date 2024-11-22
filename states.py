@@ -100,7 +100,7 @@ class states:
                 return self.state
             
     #1 qubit states
-    def Zero(self):
+    def zero(self):
         """
         This function gives the |0> = [[1],[0]] state.
 
@@ -110,7 +110,7 @@ class states:
         self.state = np.array([[1], [0]])
         return self.state
 
-    def One(self):
+    def one(self):
         """
         This function gives the state: |1> = [[0],[1]].
 
@@ -120,7 +120,7 @@ class states:
         self.state = np.array([[0], [1]])
         return self.state
 
-    def Plus(self):
+    def plus(self):
         """
         This function gives the state: |+> = (|0>+|1>)/sqrt(2).
 
@@ -130,7 +130,7 @@ class states:
         self.state = (1/math.sqrt(2))*np.array([[1], [1]])
         return self.state
 
-    def Minus(self):
+    def minus(self):
         """
         This function gives the state: |-> = (|0>-|1>)/sqrt(2).
 
@@ -140,7 +140,7 @@ class states:
         self.state = (1/math.sqrt(2))*np.array([[1], [-1]])
         return self.state
 
-    def Plus_i(self):
+    def plus_i(self):
         """
         This function gives the state: |i> = (|0>+i|1>)/sqrt(2).
 
@@ -150,7 +150,7 @@ class states:
         self.state = (1/math.sqrt(2))*np.array([[1], [complex(0,1)]])
         return self.state
 
-    def Minus_i(self):
+    def minus_i(self):
         """
         This function gives the state: |-i> = (|0>-i|1>)/sqrt(2).
 
@@ -161,47 +161,47 @@ class states:
         return self.state
 
     #Bell States (2 qubits)
-    zero = np.array([[1], [1]])
-    one = np.array([[0], [1]])
+    Zero = np.array([[1], [1]])
+    One = np.array([[0], [1]])
 
-    def Psi_plus(self):
+    def psi_plus(self):
         """
         This function gives the state: |Psi+> = (|01>+|10>)/sqrt(2).
 
         Returns:
             array : An array of numbers.
         """
-        self.state = (1/math.sqrt(2))*((np.kron(zero, one) + np.kron(one, zero)))
+        self.state = (1/math.sqrt(2))*((np.kron(state.zero(), state.one()) + np.kron(state.one(), state.zero())))
         return self.state
 
-    def Psi_minus(self):
+    def psi_minus(self):
         """
         This function gives the state: |Psi-> = (|01>-|10>)/sqrt(2).
 
         Returns:
             array : An array of numbers.
         """
-        self.state = (1/math.sqrt(2))*((np.kron(zero, one) - np.kron(one, zero)))
+        self.state = (1/math.sqrt(2))*((np.kron(state.zero(), state.one()) - np.kron(state.one(), state.zero())))
         return self.state
 
-    def Phi_plus(self):
+    def phi_plus(self):
         """
         This function gives the state: |Phi+> = (|00>+|11>)/sqrt(2).
 
         Returns:
             array : An array of numbers.
         """
-        self.state = (1/math.sqrt(2))*((np.kron(zero, zero) + np.kron(one, one)))
+        self.state = (1/math.sqrt(2))*((np.kron(state.zero(), state.zero()) + np.kron(state.one(), state.one())))
         return self.state
 
-    def Phi_minus(self):
+    def phi_minus(self):
         """
         This function gives the state: |Psi-> = (|00>-|11>)/sqrt(2).
 
         Returns:
             array : An array of complex numbers.
         """
-        self.state = (1/math.sqrt(2))*((np.kron(zero, zero) - np.kron(one, one)))
+        self.state = (1/math.sqrt(2))*((np.kron(state.zero(), state.zero()) - np.kron(state.one(), state.one())))
         return self.state
 
     #Tensor Product for only 2 qubits
@@ -243,9 +243,9 @@ state = states()
 
 #Check
 print(state.state_norm(1, [1,8]))
-print(state.Minus())
+print(state.minus())
 print(state.tp([[2,7],[4,5]]))
-print(state.tp([state.Zero(), state.One()]))
+print(state.tp([state.zero(), state.one()]))
 
 
 #Error Check
