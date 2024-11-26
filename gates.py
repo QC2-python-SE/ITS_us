@@ -122,20 +122,169 @@ def create_gate(num_qubits, array):
     return gate
 
 
-def phase_gate(phase):
-    """
-    Creates a phase gate from a given input phase.
 
-    Args:
-        phase (float): The input phase, must be a real number.
+class PhaseGate(Gate):
+    def __init__(self, phase):
+        """
+        Initiates a phase gate from a given input phase.
+
+        Args:
+            phase (float): The input phase, must be a real number.
+        
+        Returns:
+            Gate: the corresponding phase gate.
+        """
+        num_qubits = 1
+        array = [[1,0],[0,np.exp(1j*phase)]]
+        super().__init__(num_qubits, array)
+
+
+class ControlledGate2(Gate):
+    def __init__(self, control, gate1):
+        
+        """
+        Initiates a controlled gate (custom) for 2 qubit systems, with the control from specified qubit.
+
+        Args:
+            gate (Gate): must be a 1-qubit gate.
+            control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
+        """
+
+        num_qubits = 2
+        if gate1.get_num_qubits() != 1:
+            raise ValueError('The gate is not a one-qubit gate.')
+        U_gate = gate1.get_array()
+        if control == 1:
+         array = [[1,0,0,0],[0,1,0,0],[0,0,U_gate[0,0],U_gate[0,1]],[0,0,U_gate[1,0],U_gate[1,1]]]
+        elif control == 2:
+            array = [[1,0,0,0],[0,U_gate[0,0],0,U_gate[0,1]],[0,0,1,0],[0,U_gate[1,0],0,U_gate[1,1]]]
+        super().__init__(num_qubits, array)
+
     
-    Returns:
-        Gate: the corresponding phase gate.
+class CNOTGate2(Gate):
+    def __init__(self, control):
+        """
+        Initiates a CNOT gate for 2 qubit systems, with the control from specified qubit.
+        This is equivalent to "controlled_gate2(X_gate, control)".
+
+        Args:
+            control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
+        """
+        num_qubits = 2
+        if control == 1:
+         array = [[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]]
+        elif control == 2:
+            array = [[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]]
+        super().__init__(num_qubits, array)
+
+
+class XGate(Gate):
     """
-    if np.imag(phase) != 0:
-        raise ValueError('Input phase is not real. The gate is not unitary.')
+    Initiates an X gate.
     
-    return Gate(1, [[1,0],[0,np.exp(1j*phase)]])
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = [[0,1],[1,0]]
+        super().__init__(num_qubits, array)
+
+class YGate(Gate):
+    """
+    Initiates a Y gate.
+    
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = [[0,-1j],[1j,0]]
+        super().__init__(num_qubits, array)
+
+class ZGate(Gate):
+    """
+    Initiates a Z gate.
+    
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = [[1,0],[0,-1]]
+        super().__init__(num_qubits, array)
+
+class HGate(Gate):
+    """
+    Initiates a Hadamard gate.
+    
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = np.array([[1,1],[1,-1]])/np.sqrt(2)
+        super().__init__(num_qubits, array)
+
+class SGate(Gate):
+    """
+    Initiates an S gate.
+    
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = [[1,0],[0,1j]]
+        super().__init__(num_qubits, array)
+
+class TGate(Gate):
+    """
+    Initiates a T gate.
+    
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = [[1,0],[0,(1+1j)/np.sqrt(2)]]
+        super().__init__(num_qubits, array)
+
+class SWAPGate2(Gate):
+    """
+    Initiates a SWAP gate for 2 qubits.
+    
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]]
+        super().__init__(num_qubits, array)
+
+class HHGate2(Gate):
+    """
+    Initiates a HxH gate.
+    
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,1,1,1],[1,-1,1,-1],[1,1,-1,-1],[1,-1,-1,1]]
+        super().__init__(num_qubits, array)
+
+class FTGate2(Gate):
+    """
+    Initiates a FT gate.
+    
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,1,1,1],[1,1j,-1,-1j],[1,-1,1,-1],[1,-1j,-1,1j]]
+        super().__init__(num_qubits, array)
 
 
 def tensorprod(gate_list):
@@ -158,59 +307,3 @@ def tensorprod(gate_list):
     
     tensor_gate = Gate(tensor_num_qubits, tensor_array)
     return tensor_gate
-
-
-def controlled_gate2(gate, control):
-    """
-    Controlled gate (custom) for 2 qubit systems, with the control from specified qubit.
-
-    Args:
-        gate (Gate): must be a 1-qubit gate.
-        control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
-    
-    Returns:
-        Gate: the controlled gate.
-    """
-    U_gate = gate.array
-    if control == 1:
-        return  Gate(2, [[1,0,0,0],[0,1,0,0],[0,0,U_gate[0,0],U_gate[0,1]],[0,0,U_gate[1,0],U_gate[1,1]]])
-    elif control == 2:
-        return  Gate(2, [[1,0,0,0],[0,U_gate[0,0],0,U_gate[0,1]],[0,0,1,0],[0,U_gate[1,0],0,U_gate[1,1]]])
-    else:
-        raise ValueError('The control must be 1 or 2 for a 2-qubit system.')
-
-
-def CNOT_gate2(control):
-    """
-    CNOT gate for 2 qubit systems, with the control from specified qubit.
-    This is equivalent to "controlled_gate2(X_gate, control)".
-
-    Args:
-        control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
-    
-    Returns:
-        Gate object: the CNOT gate.
-    """
-    if control == 1:
-        return  Gate(2, [[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]])
-    elif control == 2:
-        return  Gate(2, [[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]])
-    else:
-        raise ValueError('The control must be 1 or 2 for a 2-qubit system.')
-    
-
-### how do I docstring constants properly?
-
-X_gate = Gate(1, [[0,1],[1,0]])
-Y_gate = Gate(1, [[0,-1j],[1j,0]])
-Z_gate = Gate(1, [[1,0],[0,-1]])
-H_gate = Gate(1, np.array([[1,1],[1,-1]])/np.sqrt(2))
-S_gate = Gate(1, [[1,0],[0,1j]])
-T_gate = Gate(1, [[1,0],[0,(1+1j)/np.sqrt(2)]])
-SWAP_gate2 = Gate(2, [[1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]])
-HH_gate2 = Gate(2, 0.5 * np.array([[1,1,1,1],[1,-1,1,-1],[1,1,-1,-1],[1,-1,-1,1]]))
-FT_gate2 = Gate(2, 0.5 * np.array([[1,1,1,1],[1,1j,-1,-1j],[1,-1,1,-1],[1,-1j,-1,1j]]))
-
-
-
-
