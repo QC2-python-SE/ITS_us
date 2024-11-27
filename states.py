@@ -4,13 +4,15 @@
 States script:
 ==============
 
-- Provides built-in initial states for 1 and 2 qubits.
 - Normalises given initial states for N qubits.
+- Given angle(:math:'\theta,\phi'), it gives :math:'| \Psi >' state.
+- Provides built-in initial states for 1 and 2 qubits.
 
 Dependencies:
 ~~~~~~~~~~~~~
 - numpy
 - math
+- cmath
 
 Built-in 1 qubit states:
 ~~~~~~~~~~~~~~~~~~~~~~~~
