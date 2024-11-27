@@ -61,7 +61,7 @@ Built-in Bell States (2 qubits):
 
 import numpy as np
 import warnings
-import math
+import math, cmath
 
 # Ignore warnings for clean output
 warnings.filterwarnings('ignore')
@@ -83,6 +83,7 @@ class States:
             5. Returns the normalised list.
 
         Args:
+            N (int): Number of qubits given.
             coef_list (list): An inititial state list of complex numbers for N qubits.
 
         Returns:
@@ -124,6 +125,35 @@ class States:
             else:
                 self.state = norm_state
                 return self.state
+    
+    def angle(self, theta = 0, phi = 0):
+        """
+        Takes angles :math: '\theta and \phi', and outputs state: :math:'| \Psi > = cos(\frac{\theta}{2})|0> + sin(\frac{\theta}{2})e^(i\phi)|1>.
+
+        Args:
+            theta (int): Polar angle range from :math: '0< \theta < \pi'
+            phi (int): Azimuthal angle range from :math: '0< \phi < 2 \pi'
+
+        Returns:
+            array: A normalised initial state array of complex numbers for 2 qubits.
+        
+        """
+        z = np.array([[1],[0]])
+        o = np.array([[0],[1]])
+
+        #if angle given in degrees, change to radians and compute Psi (approximation: works only if given degree is above 2pi)
+        if theta > 2*math.pi or phi > 2*math.pi:
+            theta_r = math.radians(theta)
+            phi_r = math.radians(phi)
+            e = cmath.exp(complex(0,phi_r))
+            psi = round(math.cos(theta_r/2),8)*z + round(math.sin(theta_r/2),8)*complex(round(e.real, 8), round(e.imag, 8))*o
+
+        #if angle in radians compute Psi directly
+        else:
+            psi = math.cos(theta/2)*z + math.sin(theta/2)*cmath.exp(complex(0,phi))*o
+        
+        return psi
+
             
 
 
@@ -222,7 +252,7 @@ class BuiltIn(States):
             array : An array of numbers.
         """
         return (1/math.sqrt(2))*(np.kron(self.zero(), self.zero()) + np.kron(self.one(), self.one()))
-
+ 
     def phi_minus(self):
         """
         This function gives the :math:'| \Phi^- >' state.
@@ -275,6 +305,7 @@ print(tp(state1, state2))
 print(tp(bis.zero(), bis.one()))
 print(bis.one())
 print(bis.psi_plus())
+print(state.angle(90,90))
 
 #Error Check
 #print(state.tp([[2,"f"],[4,5]]))
