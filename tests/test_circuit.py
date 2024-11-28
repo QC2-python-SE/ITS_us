@@ -4,13 +4,12 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import numpy as np
-from states import states
+from states import States
 from gates import Gate
 from circuits import Circuits
-
 import pytest
 
-
+@pytest.fixture
 def test_add_single_gates():
     """
     Test to ensure that the gate added to the Gates.gates list of tuples is added correctly
