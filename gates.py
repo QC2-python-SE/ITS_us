@@ -42,6 +42,11 @@ cnot1   = gates.CNOT_gate2(1)   # produces instance of a CNOT gate with control 
 
 import numpy as np
 
+
+# Gate parent class
+#   - Gate(object).
+
+
 class Gate(object):
     """
     The Gate object is an n-qubit gate represented in the standard basis.
@@ -82,46 +87,50 @@ class Gate(object):
             int: number of qubits
         """
         return self.num_qubits
-        
 
-def create_gate(num_qubits, array):
+
+# One-qubit Gate child classes with input parameters:
+#   - RotationGate(Gate);
+#   - PhaseGate(Gate).
+
+
+### Euler angles (rot1, rot2, rot3) or make rotation more intuitive by getting the direction of rotation (theta, phi) and the rotation angle (alpha)
+class RotationGate(Gate):
     """
-    Creates a customised gate U. It needs to be unitary or scalable to unitary, in which case it is automatically scaled to a unitary matrix.
+    Initiates a general rotation using the Euler angles.
 
-    Args:
-        num_qubits (int): the number of qubits that pass through the gate,
-        array (array_like): A 2^n by 2^n array of floats, where n = num_qubits (int) is the number of qubits.
-    
-    Returns:
-        Gate: the custom gate.
-
+    Attributes:
+        rot1 (float): first Euler angle, rotates around the Z axis;
+        rot2 (float): second Euler angle, rotates around the X axis;
+        rot3 (flat): third Euler angle, rotates around the Z axis.
     """
+    def __init__(self, rot1, rot2, rot3):
+        """
+        Args:
+        rot1 (float): first Euler angle, rotates around the Z axis;
+        rot2 (float): second Euler angle, rotates around the X axis;
+        rot3 (flat): third Euler angle, rotates around the Z axis.
+        """
+        num_qubits = 1
+        array = [[np.cos(rot2/2), -np.exp(1j*rot3)*np.sin(rot2/2)],
+                 [np.exp(1j*rot1)*np.sin(rot2/2), np.exp(1j*(rot3+rot1))*np.cos(rot2/2)]]
+        super().__init__(num_qubits, array)
+        self.rot1 = rot1
+        self.rot2 = rot2
+        self.rot3 = rot3
     
-    gate = Gate(num_qubits, array)
+    def get_angle(rotation_number):
+        """
+        Gives the angle of the rotation 'rot{rotation_number}', where the number designates which rotation this is.
 
-    # Array must contain ints, floats or complex numbers.
-    try:
-        np.sum(gate.array)
-    except:
-        raise TypeError('Input array contains non-numerical elements. Elements of the array \
-                        should be integers, float points, or complex numbers of the form (<float> + <float> j).')
+        Args:
+            number (int): number of rotation angle called.
+
+        Returns:
+            float: rotation angle.
+        """
+        return eval('rot'+rotation_number)
     
-    # Array must be square of the form (2^n x 2^n).
-    if gate.array.shape != (2**gate.num_qubits, 2**gate.num_qubits):
-        raise ValueError('The number of qubits does not match array size. Check that a- your \
-                            array is square, b- its size is (2^n x 2^n).')
-    
-    # Array must be unitary or scalable to a unitary matrix. For the latter case, it is rescaled to a unitary matrix.
-    check_identity = gate.array * gate.array.conj().T
-
-    if np.array_equal(check_identity, np.identity(gate.num_qubits) * check_identity[0,0]):
-        raise ValueError('The gate is not unitary or scalable to unitary. Check for typos in the matrix elements.')
-    elif check_identity[0,0] != 1:
-        gate.array /= np.sqrt(check_identity[0,0])
-    
-    return gate
-
-
 
 class PhaseGate(Gate):
     """
@@ -159,6 +168,11 @@ class PhaseGate(Gate):
         """
         self.phase = new_phase
         self.array = [[1,0],[0,np.exp(1j*new_phase)]]
+
+
+# Two-qubit Gate child classes with input parameters:
+#   - ControlledGate2(Gate);
+#   - CNOTGate2(Gate).
 
 
 class ControlledGate2(Gate):
@@ -236,6 +250,15 @@ class CNOTGate2(Gate):
             int: the position of the control qubit (1 or 2).
         """
         return self.control
+    
+
+# One-qubit Gate child classes with no input parameters:
+#   - XGate(Gate);
+#   - YGate(Gate);
+#   - ZGate(Gate);
+#   - HGate(Gate);
+#   - SGate(Gate);
+#   - TGate(Gate).
 
 
 class XGate(Gate):
@@ -310,6 +333,13 @@ class TGate(Gate):
         array = [[1,0],[0,(1+1j)/np.sqrt(2)]]
         super().__init__(num_qubits, array)
 
+
+# Two-qubit Gate child classes with no input parameters:
+#   - SWAPGate2(Gate);
+#   - HHGate2(Gate);
+#   - FTGate2(Gate);
+
+
 class SWAPGate2(Gate):
     """
     Initiates a SWAP gate for 2 qubits.
@@ -347,45 +377,47 @@ class FTGate2(Gate):
         super().__init__(num_qubits, array)
 
 
-### Euler angles (rot1, rot2, rot3) or make rotation more intuitive by getting the direction of rotation (theta, phi) and the rotation angle (alpha)
-class RotationGate(Gate):
-    """
-    Initiates a general rotation using the Euler angles.
+# Functions:
+#   - create_gate(num_qubits, array);
+#   - tensorprod(gate_list).
 
-    Attributes:
-        rot1 (float): first Euler angle, rotates around the Z axis;
-        rot2 (float): second Euler angle, rotates around the X axis;
-        rot3 (flat): third Euler angle, rotates around the Z axis.
+
+def create_gate(num_qubits, array):
     """
-    def __init__(self, rot1, rot2, rot3):
-        """
-        Args:
-        rot1 (float): first Euler angle, rotates around the Z axis;
-        rot2 (float): second Euler angle, rotates around the X axis;
-        rot3 (flat): third Euler angle, rotates around the Z axis.
-        """
-        num_qubits = 1
-        array = [[np.cos(rot2/2), -np.exp(1j*rot3)*np.sin(rot2/2)],
-                 [np.exp(1j*rot1)*np.sin(rot2/2), np.exp(1j*(rot3+rot1))*np.cos(rot2/2)]]
-        super().__init__(num_qubits, array)
-        self.rot1 = rot1
-        self.rot2 = rot2
-        self.rot3 = rot3
+    Creates a customised gate U. It needs to be unitary or scalable to unitary, in which case it is automatically scaled to a unitary matrix.
+
+    Args:
+        num_qubits (int): the number of qubits that pass through the gate,
+        array (array_like): A 2^n by 2^n array of floats, where n = num_qubits (int) is the number of qubits.
     
-    def get_angle(rotation_number):
-        """
-        Gives the angle of the rotation 'rot{rotation_number}', where the number designates which rotation this is.
+    Returns:
+        Gate: the custom gate.
 
-        Args:
-            number (int): number of rotation angle called.
+    """
+    
+    gate = Gate(num_qubits, array)
 
-        Returns:
-            float: rotation angle.
-        """
-        return eval('rot'+rotation_number)
+    # Array must contain ints, floats or complex numbers.
+    try:
+        np.sum(gate.array)
+    except:
+        raise TypeError('Input array contains non-numerical elements. Elements of the array \
+                        should be integers, float points, or complex numbers of the form (<float> + <float> j).')
+    
+    # Array must be square of the form (2^n x 2^n).
+    if gate.array.shape != (2**gate.num_qubits, 2**gate.num_qubits):
+        raise ValueError('The number of qubits does not match array size. Check that a- your \
+                            array is square, b- its size is (2^n x 2^n).')
+    
+    # Array must be unitary or scalable to a unitary matrix. For the latter case, it is rescaled to a unitary matrix.
+    check_identity = gate.array * gate.array.conj().T
 
-
-
+    if np.array_equal(check_identity, np.identity(gate.num_qubits) * check_identity[0,0]):
+        raise ValueError('The gate is not unitary or scalable to unitary. Check for typos in the matrix elements.')
+    elif check_identity[0,0] != 1:
+        gate.array /= np.sqrt(check_identity[0,0])
+    
+    return gate
 
 def tensorprod(gate_list):
     """
@@ -398,6 +430,14 @@ def tensorprod(gate_list):
         Gate: resulting gate
     """
 
+    # test if input is a list of gates.
+    tester = 0
+    for i in range(len(gate_list)):
+        try:
+            tester += gate_list[i]
+        except:
+            raise TypeError(f'Entry {i} from the list is not a Gate object.')
+
     tensor_array = gate_list[0].array
     tensor_num_qubits = gate_list[0].num_qubits
     
@@ -407,3 +447,5 @@ def tensorprod(gate_list):
     
     tensor_gate = Gate(tensor_num_qubits, tensor_array)
     return tensor_gate
+
+
