@@ -56,7 +56,7 @@ class Gate(object):
         Initiates the Gate class.
 
         Args:
-            num_qubits (int): the number of qubits that pass through the gate,
+            num_qubits (int): The number of qubits that pass through the gate,
             array (array_like): A 2^n by 2^n array of floats, where n = num_qubits (int) is the number of qubits.
         """
 
@@ -124,30 +124,59 @@ def create_gate(num_qubits, array):
 
 
 class PhaseGate(Gate):
+    """
+    Phase gate from a given input phase. Sign convention:  |1>  ->  exp(+j*phase) |1>.
+
+    Attributes:
+        phase (float): The phase of the phase gate.
+    """
+
     def __init__(self, phase):
         """
-        Initiates a phase gate from a given input phase.
+        Initiates the attributes of the phase gate.
 
         Args:
             phase (float): The input phase, must be a real number.
-        
-        Returns:
-            Gate: the corresponding phase gate.
         """
         num_qubits = 1
         array = [[1,0],[0,np.exp(1j*phase)]]
         super().__init__(num_qubits, array)
+        self.phase = phase
+
+    def get_phase(self):
+        """
+        Returns:
+            float: the phase of the phase gate.
+        """
+        return self.phase
+
+    def set_phase(self, new_phase):
+        """
+        Sets a new phase for the phase gate (e.g. for a phase gate with a variable input phase).
+
+        Args:
+            new_phase (float): The new phase for the phase gate.
+        """
+        self.phase = new_phase
+        self.array = [[1,0],[0,np.exp(1j*new_phase)]]
 
 
 class ControlledGate2(Gate):
+    """
+    Controlled gate (custom) for 2 qubit systems, with the control from specified qubit.
+
+    Attributes:
+        gate (Gate): must be a 1-qubit gate.
+        control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
+    """
     def __init__(self, control, gate1):
         
         """
-        Initiates a controlled gate (custom) for 2 qubit systems, with the control from specified qubit.
+        Initiates the attributes of the controlled gate.
 
         Args:
             gate (Gate): must be a 1-qubit gate.
-            control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
+            control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.          
         """
 
         num_qubits = 2
@@ -159,13 +188,36 @@ class ControlledGate2(Gate):
         elif control == 2:
             array = [[1,0,0,0],[0,U_gate[0,0],0,U_gate[0,1]],[0,0,1,0],[0,U_gate[1,0],0,U_gate[1,1]]]
         super().__init__(num_qubits, array)
+        self.control = control
+        self.target_gate = gate1
+
+    def get_control(self):
+        """
+        Returns:
+            int: the position of the control qubit (1 or 2).
+        """
+        return self.control
+
+    def get_target_gate(self):
+        """
+        Returns:
+            Gate: the target gate used in the control gate.
+        """
+        copy = np.copy(self.target_gate)
+        return copy
 
     
 class CNOTGate2(Gate):
+    """
+    CNOT gate for 2 qubit systems, with the control from specified qubit.
+    This is equivalent to "controlled_gate2(X_gate, control)".
+
+    Attributes:
+        control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
+    """
     def __init__(self, control):
         """
-        Initiates a CNOT gate for 2 qubit systems, with the control from specified qubit.
-        This is equivalent to "controlled_gate2(X_gate, control)".
+        Initiates the attributes of the CNOT gate.
 
         Args:
             control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
@@ -176,6 +228,14 @@ class CNOTGate2(Gate):
         elif control == 2:
             array = [[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]]
         super().__init__(num_qubits, array)
+        self.control = control
+
+    def get_control(self):
+        """
+        Returns:
+            int: the position of the control qubit (1 or 2).
+        """
+        return self.control
 
 
 class XGate(Gate):
@@ -276,7 +336,7 @@ class HHGate2(Gate):
 
 class FTGate2(Gate):
     """
-    Initiates a FT gate.
+    Initiates a Quantum Fourier Transform gate.
     
     Args:
         None.
@@ -285,6 +345,46 @@ class FTGate2(Gate):
         num_qubits = 2
         array = [[1,1,1,1],[1,1j,-1,-1j],[1,-1,1,-1],[1,-1j,-1,1j]]
         super().__init__(num_qubits, array)
+
+
+### Euler angles (rot1, rot2, rot3) or make rotation more intuitive by getting the direction of rotation (theta, phi) and the rotation angle (alpha)
+class RotationGate(Gate):
+    """
+    Initiates a general rotation using the Euler angles.
+
+    Attributes:
+        rot1 (float): first Euler angle, rotates around the Z axis;
+        rot2 (float): second Euler angle, rotates around the X axis;
+        rot3 (flat): third Euler angle, rotates around the Z axis.
+    """
+    def __init__(self, rot1, rot2, rot3):
+        """
+        Args:
+        rot1 (float): first Euler angle, rotates around the Z axis;
+        rot2 (float): second Euler angle, rotates around the X axis;
+        rot3 (flat): third Euler angle, rotates around the Z axis.
+        """
+        num_qubits = 1
+        array = [[np.cos(rot2/2), -np.exp(1j*rot3)*np.sin(rot2/2)],
+                 [np.exp(1j*rot1)*np.sin(rot2/2), np.exp(1j*(rot3+rot1))*np.cos(rot2/2)]]
+        super().__init__(num_qubits, array)
+        self.rot1 = rot1
+        self.rot2 = rot2
+        self.rot3 = rot3
+    
+    def get_angle(rotation_number):
+        """
+        Gives the angle of the rotation 'rot{rotation_number}', where the number designates which rotation this is.
+
+        Args:
+            number (int): number of rotation angle called.
+
+        Returns:
+            float: rotation angle.
+        """
+        return eval('rot'+rotation_number)
+
+
 
 
 def tensorprod(gate_list):
