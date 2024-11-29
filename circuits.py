@@ -1,6 +1,6 @@
 # this is a placeholder
 """
-States script:
+Circuits module
 ==============
 
 - Provides built-in initial states for 1 and 2 qubits.
@@ -9,27 +9,33 @@ States script:
 Dependencies:
 ~~~~~~~~~~~~~
 - numpy
-- math
+- copy
 
 """
 
 
 import numpy as np
-from states import States, BuiltIn
+from states import *
 from gates import Gate
-
+from copy import deepcopy
 
 class Circuits:
 
-    def __init__(self, N_wires=1, state_init=BuiltIn().zero()):
+    def __init__(self, N_wires=1, state_init= Zero()):
 
         self.N_wires = N_wires
-        self.state = state_init
+        self.state_init = state_init
         self.gates = []
 
+        #checks on the input variables
+        if isinstance(state_init, States) == False:
+            raise TypeError("Initial state must be State type")
+        while N_wires not in [1, 2]:
+            raise TypeError("Number of wires must be 1 or 2")
+
         # check that the initial state has the correct dimension for the number of wires
-        if np.log2(len(state_init)) != N_wires:
-            raise ValueError("The initial state must be a power of 2.")
+        if np.log2(len(state_init.get_state())) != N_wires:
+            raise ValueError("The initial state dimension must match the number of wires.")
 
     def get_gates(self):
         """
@@ -37,11 +43,15 @@ class Circuits:
         """
         return self.gates
 
-    def get_state(self):
+    def get_state_init(self):
         """
-        Returns the current quantum state of the circuit
+        Returns the initial quantum state of the circuit as an array
+
+        Returns:
+            array: The state as a numpy array
+    
         """
-        return self.state
+        return self.state_init.get_state()
 
     def add_single_qubit_gate(self, gate: Gate, target_wire: int = 0):
         """
@@ -82,7 +92,14 @@ class Circuits:
         self.gates.append(gate_target_tuple)
 
     def run_circuit(self):
-        
+        """
+        Applies the circuit at the current stage 
+
+        Returns:
+            State: Final state after running the circuit
+        """
+        #prepare initial state array
+        state_array = deepcopy(self.get_state_init())
         for gate in self.gates:
             #create a temporary identity matrix based on the number of wires
 
@@ -99,11 +116,12 @@ class Circuits:
             elif gate[1].num_qubits == 2:
                 N_wire_gate = gate[1].get_array()
 
-            self.state = N_wire_gate @ self.state
+            state_array = N_wire_gate @ state_array
 
             
-        return self.state
+        return States(state = state_array, N=self.N_wires)
                 
         
     def measure_qubits():
         raise NotImplementedError
+
