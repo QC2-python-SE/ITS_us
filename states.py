@@ -1,11 +1,12 @@
 ##STATES
 
-"""
+#documentation
+r"""
 States script:
 ==============
 
 - Normalises given initial states for N qubits.
-- Given angle(:math:'\theta,\phi'), it gives :math:'| \Psi >' state.
+- Given angle(:math:`\theta,\phi`), it gives :math:`| \Psi >` state.
 - Provides built-in initial states for 1 and 2 qubits.
 
 Dependencies:
@@ -24,19 +25,27 @@ Built-in 1 qubit states:
     |1> = [[0],[1]]
 
 - plus state: 
+
 .. math::
+
     |+> =  \frac{1}{\sqrt{2}}(|0> + |1>)
 
 - minus state: 
+
 .. math::
+
     |-> =  \frac{1}{\sqrt{2}}(|0> - |1>)
 
 - plus_i state: 
+
 .. math::
+
     |i> =  \frac{1}{\sqrt{2}}(|0> + i|1>)
 
-- minus_i state: 
+- minus_i state:
+
 .. math::
+
     |-i> =  \frac{1}{\sqrt{2}}(|0> - i|1>)
 
 
@@ -44,19 +53,27 @@ Built-in Bell States (2 qubits):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - PsiPlus state: 
+
 .. math::
+
     | \Psi^+ > =  \frac{1}{\sqrt{2}}(|01> + |10>)
 
 - PsiMinus state: 
+
 .. math::
+
     | \Psi^- > =  \frac{1}{\sqrt{2}}(|01> - |10>)
 
-- PhiPlus state: 
+- PhiPlus state:
+
 .. math::
+
     | \Phi^+ > =  \frac{1}{\sqrt{2}}(|00> + |11>)
 
 - PhiMinus state: 
+
 .. math::
+
     | \Phi^- > =  \frac{1}{\sqrt{2}}(|00> - |11>)
 
 """
@@ -72,11 +89,11 @@ warnings.filterwarnings('ignore')
 class States:
     def __init__(self, N = 1, state = np.array([[1], [0]])):
         """
-        Initiates the Gate class.
+        Initiates the States class.
 
         Args:
-            num_qubits (int): The number of qubits that pass through the gate,
-            array (array_like): A 2^n by 2^n array of floats, where n = num_qubits (int) is the number of qubits.
+            N (int): The number of qubits that pass through the gate,
+            array (array_like): A 2^N by 2^N array of floats, where N (int) is the number of qubits.
         """
         self.N = N
         self.state = state
@@ -132,9 +149,7 @@ class One(States):
 
 class Plus(States):
     """
-    This function gives the state:
-    .. math::
-        |+> =  \frac{1}{\sqrt{2}}(|0> + |1>)
+    This function gives the |+> state:
 
     Returns:
         array : An array of numbers.
@@ -149,9 +164,7 @@ class Plus(States):
 
 class Minus(States):
     """
-    This function gives the state:
-    .. math::
-        |-> =  \frac{1}{\sqrt{2}}(|0> - |1>)
+    This function gives the |-> state:
 
     Returns:
         array : An array of numbers.
@@ -166,9 +179,7 @@ class Minus(States):
 
 class PlusI(States):
     """
-    This function gives the state:
-    .. math::
-        |i> =  \frac{1}{\sqrt{2}}(|0> + i|1>)
+    This function gives the |i> state.
 
     Returns:
         array : An array of numbers.
@@ -183,9 +194,7 @@ class PlusI(States):
 
 class MinusI(States):
     """
-    This function gives the state:
-    .. math::
-        |-i> =  \frac{1}{\sqrt{2}}(|0> - i|1>)
+    This function gives the |-i> state:
 
     Returns:
         array : An array of numbers.
@@ -200,8 +209,8 @@ class MinusI(States):
 
 #2 qubit states (Bell states)
 class PsiPlus(States):
-    """
-    This function gives the :math:'| \Psi^+ >' state.
+    r"""
+    This function gives the :math:`| \Psi^+ >` state.
 
     Returns:
         array : An array of numbers.
@@ -215,8 +224,8 @@ class PsiPlus(States):
         super().__init__(num_qubits, array)
 
 class PsiMinus(States):
-    """
-    This function gives the :math:'| \Psi^- >' state.
+    r"""
+    This function gives the :math:`| \Psi^- >` state.
 
     Returns:
         array : An array of numbers.
@@ -230,8 +239,8 @@ class PsiMinus(States):
         super().__init__(num_qubits, array)
 
 class PhiPlus(States):
-    """
-    This function gives the :math:'| \Phi^+ >' state.
+    r"""
+    This function gives the :math:`| \Phi^+ >` state.
 
     Returns:
         array : An array of numbers.
@@ -245,8 +254,8 @@ class PhiPlus(States):
         super().__init__(num_qubits, array)
 
 class PhiMinus(States):
-    """
-    This function gives the :math:'| \Phi^- >' state.
+    r"""
+    This function gives the :math:`| \Phi^- >` state.
 
     Returns:
         array : An array of numbers.
@@ -314,12 +323,12 @@ def norm(N, coef_list):
         
 #Initial state formed from given angle theta and phi
 def angle(theta = 0, phi = 0):
-    """
-    Takes angles :math: '\theta and \phi', and outputs state: :math:'| \Psi > = cos(\frac{\theta}{2})|0> + sin(\frac{\theta}{2})e^(i\phi)|1>.
+    r"""
+    Takes angles :math:`\theta \ and \ \phi`, and outputs state: :math:`| \Psi > = cos(\frac{\theta}{2})|0> + sin(\frac{\theta}{2})e^{i\phi}|1>`.
 
     Args:
-        theta (int): Polar angle range from :math: '0< \theta < \pi'
-        phi (int): Azimuthal angle range from :math: '0< \phi < 2 \pi'
+        theta (int): Polar angle range from :math:`0< \theta < \pi`.
+        phi (int): Azimuthal angle range from :math:`0< \phi < 2 \pi`.
 
     Returns:
         array: A normalised initial state array of complex numbers for 2 qubits.
