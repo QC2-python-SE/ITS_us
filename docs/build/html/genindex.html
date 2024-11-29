@@ -43,8 +43,10 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">ITS_us</a></li>
-<li class="toctree-l1"><a class="reference internal" href="the_test_sphinx.html">Here is an example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bell_circuit.html">Placeholder</a></li>
 </ul>
 
         </div>
@@ -75,9 +77,10 @@
 
 <div class="genindex-jumpbox">
  <a href="#A"><strong>A</strong></a>
- | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
+ | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
@@ -85,6 +88,8 @@
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
  | <a href="#Z"><strong>Z</strong></a>
  
 </div>
@@ -93,19 +98,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="circuits.html#circuits.Circuits.add_single_qubit_gate">add_single_qubit_gate() (circuits.Circuits method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="circuits.html#circuits.Circuits.add_two_qubit_gate">add_two_qubit_gate() (circuits.Circuits method)</a>
 </li>
-      <li><a href="gates.html#gates.Gate.array">array (gates.Gate attribute)</a>
-</li>
   </ul></td>
-</tr></table>
-
-<h2 id="B">B</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="states.html#states.BuiltIn">BuiltIn (class in states)</a>
+      <li><a href="states.html#states.angle">angle() (in module states)</a>
+</li>
+      <li><a href="gates.html#gates.Gate.array">array (gates.Gate attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -122,13 +121,27 @@
       </ul></li>
       <li><a href="circuits.html#circuits.Circuits">Circuits (class in circuits)</a>
 </li>
+      <li><a href="gates.html#gates.CNOTGate2">CNOTGate2 (class in gates)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gates.html#gates.CNOT_gate2">CNOT_gate2() (in module gates)</a>
+      <li><a href="gates.html#gates.CNOTGate2.control">control (gates.CNOTGate2 attribute)</a>
+
+      <ul>
+        <li><a href="gates.html#gates.ControlledGate2.control">(gates.ControlledGate2 attribute)</a>
 </li>
-      <li><a href="gates.html#gates.controlled_gate2">controlled_gate2() (in module gates)</a>
+      </ul></li>
+      <li><a href="gates.html#gates.ControlledGate2">ControlledGate2 (class in gates)</a>
 </li>
       <li><a href="gates.html#gates.create_gate">create_gate() (in module gates)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.FTGate2">FTGate2 (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -138,6 +151,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gates.html#gates.Gate">Gate (class in gates)</a>
 </li>
+      <li><a href="gates.html#gates.ControlledGate2.gate">gate (gates.ControlledGate2 attribute)</a>
+</li>
       <li>
     gates
 
@@ -145,15 +160,43 @@
         <li><a href="gates.html#module-gates">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.RotationGate.get_angle">get_angle() (gates.RotationGate method)</a>
+</li>
       <li><a href="gates.html#gates.Gate.get_array">get_array() (gates.Gate method)</a>
 </li>
+      <li><a href="gates.html#gates.CNOTGate2.get_control">get_control() (gates.CNOTGate2 method)</a>
+
+      <ul>
+        <li><a href="gates.html#gates.ControlledGate2.get_control">(gates.ControlledGate2 method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="circuits.html#circuits.Circuits.get_gates">get_gates() (circuits.Circuits method)</a>
+</li>
+      <li><a href="states.html#states.States.get_N">get_N() (states.States method)</a>
 </li>
       <li><a href="gates.html#gates.Gate.get_num_qubits">get_num_qubits() (gates.Gate method)</a>
 </li>
-      <li><a href="circuits.html#circuits.Circuits.get_state">get_state() (circuits.Circuits method)</a>
+      <li><a href="gates.html#gates.PhaseGate.get_phase">get_phase() (gates.PhaseGate method)</a>
+</li>
+      <li><a href="states.html#states.States.get_state">get_state() (states.States method)</a>
+</li>
+      <li><a href="circuits.html#circuits.Circuits.get_state_init">get_state_init() (circuits.Circuits method)</a>
+</li>
+      <li><a href="gates.html#gates.ControlledGate2.get_target_gate">get_target_gate() (gates.ControlledGate2 method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.HGate">HGate (class in gates)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.HHGate2">HHGate2 (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -163,9 +206,9 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="circuits.html#circuits.Circuits.measure_qubits">measure_qubits() (circuits.Circuits method)</a>
 </li>
-      <li><a href="states.html#states.BuiltIn.minus">minus() (states.BuiltIn static method)</a>
+      <li><a href="states.html#states.Minus">Minus (class in states)</a>
 </li>
-      <li><a href="states.html#states.BuiltIn.minus_i">minus_i() (states.BuiltIn static method)</a>
+      <li><a href="states.html#states.MinusI">MinusI (class in states)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -186,10 +229,12 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="states.html#states.States.norm">norm() (states.States method)</a>
+      <li><a href="circuits.html#circuits.Circuits.N_wires">N_wires (circuits.Circuits attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="states.html#states.norm">norm() (in module states)</a>
+</li>
       <li><a href="gates.html#gates.Gate.num_qubits">num_qubits (gates.Gate attribute)</a>
 </li>
   </ul></td>
@@ -198,7 +243,7 @@
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="states.html#states.BuiltIn.one">one() (states.BuiltIn static method)</a>
+      <li><a href="states.html#states.One">One (class in states)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -206,21 +251,23 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gates.html#gates.phase_gate">phase_gate() (in module gates)</a>
+      <li><a href="gates.html#gates.PhaseGate.phase">phase (gates.PhaseGate attribute)</a>
 </li>
-      <li><a href="states.html#states.BuiltIn.phi_minus">phi_minus() (states.BuiltIn method)</a>
+      <li><a href="gates.html#gates.PhaseGate">PhaseGate (class in gates)</a>
 </li>
-      <li><a href="states.html#states.BuiltIn.phi_plus">phi_plus() (states.BuiltIn method)</a>
+      <li><a href="states.html#states.PhiMinus">PhiMinus (class in states)</a>
+</li>
+      <li><a href="states.html#states.PhiPlus">PhiPlus (class in states)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="states.html#states.BuiltIn.plus">plus() (states.BuiltIn static method)</a>
+      <li><a href="states.html#states.Plus">Plus (class in states)</a>
 </li>
-      <li><a href="states.html#states.BuiltIn.plus_i">plus_i() (states.BuiltIn static method)</a>
+      <li><a href="states.html#states.PlusI">PlusI (class in states)</a>
 </li>
-      <li><a href="states.html#states.BuiltIn.psi_minus">psi_minus() (states.BuiltIn method)</a>
+      <li><a href="states.html#states.PsiMinus">PsiMinus (class in states)</a>
 </li>
-      <li><a href="states.html#states.BuiltIn.psi_plus">psi_plus() (states.BuiltIn method)</a>
+      <li><a href="states.html#states.PsiPlus">PsiPlus (class in states)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -228,6 +275,16 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.RotationGate.rot1">rot1 (gates.RotationGate attribute)</a>
+</li>
+      <li><a href="gates.html#gates.RotationGate.rot2">rot2 (gates.RotationGate attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.RotationGate.rot3">rot3 (gates.RotationGate attribute)</a>
+</li>
+      <li><a href="gates.html#gates.RotationGate">RotationGate (class in gates)</a>
+</li>
       <li><a href="circuits.html#circuits.Circuits.run_circuit">run_circuit() (circuits.Circuits method)</a>
 </li>
   </ul></td>
@@ -236,6 +293,14 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.PhaseGate.set_phase">set_phase() (gates.PhaseGate method)</a>
+</li>
+      <li><a href="gates.html#gates.SGate">SGate (class in gates)</a>
+</li>
+      <li><a href="circuits.html#circuits.Circuits.State_init">State_init (circuits.Circuits attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     states
 
@@ -243,9 +308,9 @@
         <li><a href="states.html#module-states">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="states.html#states.States">States (class in states)</a>
+</li>
+      <li><a href="gates.html#gates.SWAPGate2">SWAPGate2 (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -257,7 +322,25 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.TGate">TGate (class in gates)</a>
+</li>
       <li><a href="states.html#states.tp">tp() (in module states)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.XGate">XGate (class in gates)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.YGate">YGate (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -265,7 +348,11 @@
 <h2 id="Z">Z</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="states.html#states.BuiltIn.zero">zero() (states.BuiltIn static method)</a>
+      <li><a href="states.html#states.Zero">Zero (class in states)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.ZGate">ZGate (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>

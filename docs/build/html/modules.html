@@ -53,8 +53,10 @@
 <li class="toctree-l2"><a class="reference internal" href="states.html">states module</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="the_test_sphinx.html">Here is an example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bell_circuit.html">Placeholder</a></li>
 </ul>
 
         </div>
@@ -86,15 +88,17 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="circuits.html">circuits module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="circuits.html#states-script">States script:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="circuits.html#id1">Circuits module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="circuits.html#dependencies">Dependencies:</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="circuits.html#circuits.Circuits"><code class="docutils literal notranslate"><span class="pre">Circuits</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="circuits.html#circuits.Circuits.N_wires"><code class="docutils literal notranslate"><span class="pre">Circuits.N_wires</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuits.html#circuits.Circuits.State_init"><code class="docutils literal notranslate"><span class="pre">Circuits.State_init</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="circuits.html#circuits.Circuits.add_single_qubit_gate"><code class="docutils literal notranslate"><span class="pre">Circuits.add_single_qubit_gate()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="circuits.html#circuits.Circuits.add_two_qubit_gate"><code class="docutils literal notranslate"><span class="pre">Circuits.add_two_qubit_gate()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="circuits.html#circuits.Circuits.get_gates"><code class="docutils literal notranslate"><span class="pre">Circuits.get_gates()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="circuits.html#circuits.Circuits.get_state"><code class="docutils literal notranslate"><span class="pre">Circuits.get_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="circuits.html#circuits.Circuits.get_state_init"><code class="docutils literal notranslate"><span class="pre">Circuits.get_state_init()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="circuits.html#circuits.Circuits.measure_qubits"><code class="docutils literal notranslate"><span class="pre">Circuits.measure_qubits()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="circuits.html#circuits.Circuits.run_circuit"><code class="docutils literal notranslate"><span class="pre">Circuits.run_circuit()</span></code></a></li>
 </ul>
@@ -102,7 +106,26 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gates.html">gates module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.CNOT_gate2"><code class="docutils literal notranslate"><span class="pre">CNOT_gate2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates-script">Gates script:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#dependencies">Dependencies:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#built-in-1-qubit-gates">Built-in 1 qubit gates:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#built-in-2-qubit-gates">Built-in 2 qubit gates:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#example-for-calling-gates">Example for calling gates:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.CNOTGate2"><code class="docutils literal notranslate"><span class="pre">CNOTGate2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.CNOTGate2.control"><code class="docutils literal notranslate"><span class="pre">CNOTGate2.control</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.CNOTGate2.get_control"><code class="docutils literal notranslate"><span class="pre">CNOTGate2.get_control()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.ControlledGate2"><code class="docutils literal notranslate"><span class="pre">ControlledGate2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.ControlledGate2.gate"><code class="docutils literal notranslate"><span class="pre">ControlledGate2.gate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.ControlledGate2.control"><code class="docutils literal notranslate"><span class="pre">ControlledGate2.control</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.ControlledGate2.get_control"><code class="docutils literal notranslate"><span class="pre">ControlledGate2.get_control()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.ControlledGate2.get_target_gate"><code class="docutils literal notranslate"><span class="pre">ControlledGate2.get_target_gate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.FTGate2"><code class="docutils literal notranslate"><span class="pre">FTGate2</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="gates.html#gates.Gate"><code class="docutils literal notranslate"><span class="pre">Gate</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="gates.html#gates.Gate.num_qubits"><code class="docutils literal notranslate"><span class="pre">Gate.num_qubits</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="gates.html#gates.Gate.array"><code class="docutils literal notranslate"><span class="pre">Gate.array</span></code></a></li>
@@ -110,9 +133,28 @@
 <li class="toctree-l3"><a class="reference internal" href="gates.html#gates.Gate.get_num_qubits"><code class="docutils literal notranslate"><span class="pre">Gate.get_num_qubits()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.controlled_gate2"><code class="docutils literal notranslate"><span class="pre">controlled_gate2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.HGate"><code class="docutils literal notranslate"><span class="pre">HGate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.HHGate2"><code class="docutils literal notranslate"><span class="pre">HHGate2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.PhaseGate"><code class="docutils literal notranslate"><span class="pre">PhaseGate</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.PhaseGate.phase"><code class="docutils literal notranslate"><span class="pre">PhaseGate.phase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.PhaseGate.get_phase"><code class="docutils literal notranslate"><span class="pre">PhaseGate.get_phase()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.PhaseGate.set_phase"><code class="docutils literal notranslate"><span class="pre">PhaseGate.set_phase()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.RotationGate"><code class="docutils literal notranslate"><span class="pre">RotationGate</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.RotationGate.rot1"><code class="docutils literal notranslate"><span class="pre">RotationGate.rot1</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.RotationGate.rot2"><code class="docutils literal notranslate"><span class="pre">RotationGate.rot2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.RotationGate.rot3"><code class="docutils literal notranslate"><span class="pre">RotationGate.rot3</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gates.html#gates.RotationGate.get_angle"><code class="docutils literal notranslate"><span class="pre">RotationGate.get_angle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.SGate"><code class="docutils literal notranslate"><span class="pre">SGate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.SWAPGate2"><code class="docutils literal notranslate"><span class="pre">SWAPGate2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.TGate"><code class="docutils literal notranslate"><span class="pre">TGate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.XGate"><code class="docutils literal notranslate"><span class="pre">XGate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.YGate"><code class="docutils literal notranslate"><span class="pre">YGate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.ZGate"><code class="docutils literal notranslate"><span class="pre">ZGate</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="gates.html#gates.create_gate"><code class="docutils literal notranslate"><span class="pre">create_gate()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gates.html#gates.phase_gate"><code class="docutils literal notranslate"><span class="pre">phase_gate()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="gates.html#gates.tensorprod"><code class="docutils literal notranslate"><span class="pre">tensorprod()</span></code></a></li>
 </ul>
 </li>
@@ -123,23 +165,23 @@
 <li class="toctree-l3"><a class="reference internal" href="states.html#built-in-bell-states-2-qubits">Built-in Bell States (2 qubits):</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="states.html#states.BuiltIn"><code class="docutils literal notranslate"><span class="pre">BuiltIn</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.minus"><code class="docutils literal notranslate"><span class="pre">BuiltIn.minus()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.minus_i"><code class="docutils literal notranslate"><span class="pre">BuiltIn.minus_i()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.one"><code class="docutils literal notranslate"><span class="pre">BuiltIn.one()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.phi_minus"><code class="docutils literal notranslate"><span class="pre">BuiltIn.phi_minus()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.phi_plus"><code class="docutils literal notranslate"><span class="pre">BuiltIn.phi_plus()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.plus"><code class="docutils literal notranslate"><span class="pre">BuiltIn.plus()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.plus_i"><code class="docutils literal notranslate"><span class="pre">BuiltIn.plus_i()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.psi_minus"><code class="docutils literal notranslate"><span class="pre">BuiltIn.psi_minus()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.psi_plus"><code class="docutils literal notranslate"><span class="pre">BuiltIn.psi_plus()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.BuiltIn.zero"><code class="docutils literal notranslate"><span class="pre">BuiltIn.zero()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.Minus"><code class="docutils literal notranslate"><span class="pre">Minus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.MinusI"><code class="docutils literal notranslate"><span class="pre">MinusI</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.One"><code class="docutils literal notranslate"><span class="pre">One</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.PhiMinus"><code class="docutils literal notranslate"><span class="pre">PhiMinus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.PhiPlus"><code class="docutils literal notranslate"><span class="pre">PhiPlus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.Plus"><code class="docutils literal notranslate"><span class="pre">Plus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.PlusI"><code class="docutils literal notranslate"><span class="pre">PlusI</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.PsiMinus"><code class="docutils literal notranslate"><span class="pre">PsiMinus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.PsiPlus"><code class="docutils literal notranslate"><span class="pre">PsiPlus</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="states.html#states.States"><code class="docutils literal notranslate"><span class="pre">States</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="states.html#states.States.norm"><code class="docutils literal notranslate"><span class="pre">States.norm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="states.html#states.States.get_N"><code class="docutils literal notranslate"><span class="pre">States.get_N()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="states.html#states.States.get_state"><code class="docutils literal notranslate"><span class="pre">States.get_state()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.Zero"><code class="docutils literal notranslate"><span class="pre">Zero</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.angle"><code class="docutils literal notranslate"><span class="pre">angle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="states.html#states.norm"><code class="docutils literal notranslate"><span class="pre">norm()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="states.html#states.tp"><code class="docutils literal notranslate"><span class="pre">tp()</span></code></a></li>
 </ul>
 </li>

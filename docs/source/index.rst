@@ -14,6 +14,8 @@ Welcome to the documentation!
 
    modules
 
+.. toctree::
+   :maxdepth: 2
    :caption: Examples
 
-   example
+   bell_circuit.ipynb

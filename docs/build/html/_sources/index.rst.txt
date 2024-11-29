@@ -14,8 +14,8 @@ Welcome to the documentation!
 
    modules
 
-   the_test_sphinx.ipynb
-
+.. toctree::
+   :maxdepth: 2
    :caption: Examples
 
-   example
+   bell_circuit.ipynb
