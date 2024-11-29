@@ -103,7 +103,6 @@ class States:
 
 
         coef_arr = np.array(coef_list)
-
         #Squared magnitude of coeff_list.
         sqrd_mag = []
         for i in range(0,len(coef_arr)):
@@ -156,111 +155,163 @@ class States:
         return psi
             
 
+#1 qubit states
+class Zero(States):
+    """
+    This function gives the |0> = [[1],[0]] state.
 
+    Returns:
+        array : An array of numbers.
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = np.array([[1], [0]])
+        super().__init__(num_qubits, array)
 
-class BuiltIn(States):
-    def __init__(self, N = 1, state = np.array([[1], [0]])):
-        super().__init__(N, state)
+class One(States):
+    """
+    This function gives the |1> = [[0],[1]] state.
+
+    Returns:
+        array : An array of numbers.
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = np.array([[0], [1]])
+        super().__init__(num_qubits, array)
+
+class Plus(States):
+    """
+    This function gives the state:
+    .. math::
+        |+> =  \frac{1}{\sqrt{2}}(|0> + |1>)
+
+    Returns:
+        array : An array of numbers.
+
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = (1/math.sqrt(2))*np.array([[1], [1]])
+        super().__init__(num_qubits, array)
+
+class Minus(States):
+    """
+    This function gives the state:
+    .. math::
+        |-> =  \frac{1}{\sqrt{2}}(|0> - |1>)
+
+    Returns:
+        array : An array of numbers.
+
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = (1/math.sqrt(2))*np.array([[1], [-1]])
+        super().__init__(num_qubits, array)
+
+class PlusI(States):
+    """
+    This function gives the state:
+    .. math::
+        |i> =  \frac{1}{\sqrt{2}}(|0> + i|1>)
+
+    Returns:
+        array : An array of numbers.
+
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = (1/math.sqrt(2))*np.array([[1], [complex(0,1)]])
+        super().__init__(num_qubits, array)
+
+class MinusI(States):
+    """
+    This function gives the state:
+    .. math::
+        |-i> =  \frac{1}{\sqrt{2}}(|0> - i|1>)
+
+    Returns:
+        array : An array of numbers.
+
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = (1/math.sqrt(2))*np.array([[1], [complex(0,-1)]])
+        super().__init__(num_qubits, array)
+
+#2 qubit states (Bell states)
+class PsiPlus(States):
+    """
+    This function gives the :math:'| \Psi^+ >' state.
+
+    Returns:
+        array : An array of numbers.
     
-    #1 qubit states
-    @staticmethod
-    def zero():
-        """
-        This function gives the |0> = [[1],[0]] state.
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = (1/math.sqrt(2))*((np.kron(Zero(), One()) + np.kron(One(), Zero())))
+        super().__init__(num_qubits, array)
 
-        Returns:
-            array : An array of numbers.
-        """
-        return np.array([[1], [0]])
+class PsiMinus(States):
+    """
+    This function gives the :math:'| \Psi^- >' state.
+
+    Returns:
+        array : An array of numbers.
     
-    @staticmethod
-    def one():
-        """
-        This function gives the |1> = [[0],[1]] state.
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = (1/math.sqrt(2))*((np.kron(Zero(), One()) - np.kron(One(), Zero())))
+        super().__init__(num_qubits, array)
 
-        Returns:
-            array : An array of numbers.
-        """
-        return np.array([[0], [1]])
+class PhiPlus(States):
+    """
+    This function gives the :math:'| \Phi^+ >' state.
 
-    @staticmethod
-    def plus():
-        """
-        This function gives the state:
-        .. math::
-            |+> =  \frac{1}{\sqrt{2}}(|0> + |1>)
-
-        Returns:
-            array : An array of numbers.
-        """
-        return (1/math.sqrt(2))*np.array([[1], [1]])
+    Returns:
+        array : An array of numbers.
     
-    @staticmethod
-    def minus():
-        """
-        This function gives the |-> state.
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = (1/math.sqrt(2))*((np.kron(Zero(), Zero()) + np.kron(One(), One())))
+        super().__init__(num_qubits, array)
 
-        Returns:
-            array : An array of numbers.
-        """
-        return (1/math.sqrt(2))*np.array([[1], [-1]])
+class PhiMinus(States):
+    """
+    This function gives the :math:'| \Phi^- >' state.
+
+    Returns:
+        array : An array of numbers.
     
-    @staticmethod
-    def plus_i():
-        """
-        This function gives the |i> state. 
-
-        Returns:
-            array : An array of complex numbers.
-        """
-        return (1/math.sqrt(2))*np.array([[1], [complex(0,1)]])
-    
-    @staticmethod
-    def minus_i():
-        """
-        This function gives the |-i> state: 
-
-        Returns:
-            array : An array of complex numbers.
-        """
-        return (1/math.sqrt(2))*np.array([[1], [complex(0,-1)]])
-
-    #Bell States (2 qubits)
-    def psi_plus(self):
-        """
-        This function gives the :math:'| \Psi^+ >' state.
-
-        Returns:
-            array : An array of numbers.
-        """
-        return (1/math.sqrt(2))*((np.kron(self.zero(), self.one()) + np.kron(self.one(), self.zero())))
-
-    def psi_minus(self):
-        """
-        This function gives the :math:'| \Psi^- >' state.
-
-        Returns:
-            array : An array of numbers.
-        """
-        return (1/math.sqrt(2))*((np.kron(self.zero(), self.one()) - np.kron(self.one(), self.zero())))
-
-    def phi_plus(self):
-        """
-        This function gives the :math:'| \Phi^+ >' state.
-
-        Returns:
-            array : An array of numbers.
-        """
-        return (1/math.sqrt(2))*(np.kron(self.zero(), self.zero()) + np.kron(self.one(), self.one()))
-
-    def phi_minus(self):
-        """
-        This function gives the :math:'| \Phi^- >' state.
-
-        Returns:
-            array : An array of complex numbers.
-        """
-        return (1/math.sqrt(2))*((np.kron(self.zero(), self.zero()) - np.kron(self.one(), self.one())))
+    Args:
+        None.
+    """
+    def __init__(self):
+        num_qubits = 1
+        array = (1/math.sqrt(2))*((np.kron(Zero(), Zero()) - np.kron(One(), One())))
+        super().__init__(num_qubits, array)
 
 #Tensor Product for only 2 qubits
 #State_1 and State_2 could be one of the built-in functions (zero, one); otherwise, it will be normalised using norm.
