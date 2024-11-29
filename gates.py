@@ -13,36 +13,53 @@ Dependencies:
 ~~~~~~~~~~~~~
 - numpy
 
-Built-in 1 qubit gates:
+Built-in one-qubit gates:
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-- X_gate: X gate.
-- Y_gate: Y gate.
-- Z_gate: Z gate.
-- H_gate: Hadamard gate.
-- S_gate: S gate.
-- T_gate: T gate.
+    - GlobalPhaseGate(phase): gate that adds a global phase <phase> to the system;
+    - RotationGate(theta, phi, alpha): rotation of angle <alpha> around an axis on the Bloch sphere <(theta, phi)>
+    - RxGate(alpha): rotation of angle <alpha> around the x axis;
+    - RyGate(alpha): rotation of angle <alpha> around the y axis;
+    - RzGate(alpha): rotation of angle <alpha> around the z axis;
+    - PhaseGate(phase): phase gate on the second register with phase <phase>.
+
+    - IdGate(): identity gate;
+    - XGate(): X gate;
+    - YGate(): Y gate;
+    - ZGate(): Z gate;
+    - HGate(): Hadamard gate;
+    - SGate(): S gate;
+    - TGate(): T gate;
+    - SqrtXGate(): square root of X gate.
 
 
 Built-in 2 qubit gates:
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-- CNOT_gate2(control): CNOT gate with specified control.
-- SWAP_gate2: SWAP gate.
-- HH_gate2: double Hadamard gate (Hadamard on each qubit).
-- FT_gate2: Quantum Fourier Transform gate on 2 qubits.
+    - ControlledGate2(control, gate1): general controlled gate where the target <gate1> is controlled by qubit at position <control>;
+    - CNOTGate2(control): CNOT gate with the control qubit on position <control>;
+    - CPhaseGate2(phase): controlled phase gate with phase <phase>.
 
-Example for calling gates:
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+    - XXGate2(): XxX gate;
+    - YYGate2(): YxY gate;
+    - ZZGate2(): ZxZ gate;
+    - HHGate2(): HxH gate;
+    - CZGate2(): control-Z gate;
+    - CSGate2(): control-S gate;
+    - DCNOTGate2(): double CNOT gate;
+    - SWAPGate2(): SWAP gate;
+    - ISWAPGate2():iSWAP gate;
+    - SqrtSWAPGate2(): square root of SWAP gate;
+    - SqrtISWAPGate2(): square root of iSWAP gate;
+    - FTGate2(): Quantum Fourier Transform gate.
 
-x       = gates.X_gate          # produces instance of an X gate.
-cnot1   = gates.CNOT_gate2(1)   # produces instance of a CNOT gate with control on the first qubit.
-
+For more details about the gates (such as their matrix form), check https://en.wikipedia.org/wiki/List_of_quantum_logic_gates.
 """
 
 import numpy as np
 
 
+# =================
 # Gate parent class
 #   - Gate(object).
 
@@ -68,69 +85,161 @@ class Gate(object):
         self.num_qubits = num_qubits
         self.array = np.array(array)
 
+    def get_num_qubits(self):
+        """
+        Reads the number of qubits that pass through the gate.
+
+        Returns:
+            int: Number of qubits.
+        """
+
+        return self.num_qubits
 
     def get_array(self):
         """
         Reads the gate in matrix form.
 
         Returns:
-            ndarray: copy of gate array
+            ndarray: Copy of gate array.
         """
+
         copy = np.copy(self.array)
         return copy
-    
-    def get_num_qubits(self):
-        """
-        Reads the number of qubits that pass through the gate.
-
-        Returns:
-            int: number of qubits
-        """
-        return self.num_qubits
 
 
+# ===================================================
 # One-qubit Gate child classes with input parameters:
+#   - GlobalPhaseGate(Gate);
 #   - RotationGate(Gate);
+#   - RxGate(RotationGate);
+#   - RyGate(RotationGate);
+#   - RzGate(RotationGate);
 #   - PhaseGate(Gate).
 
-
-### Euler angles (rot1, rot2, rot3) or make rotation more intuitive by getting the direction of rotation (theta, phi) and the rotation angle (alpha)
-class RotationGate(Gate):
+class GlobalPhaseGate(Gate):
     """
-    Initiates a general rotation using the Euler angles.
+    Global phase gate with given phase.
 
     Attributes:
-        rot1 (float): first Euler angle, rotates around the Z axis;
-        rot2 (float): second Euler angle, rotates around the X axis;
-        rot3 (flat): third Euler angle, rotates around the Z axis.
+        global_phase (float): the global phase.
     """
-    def __init__(self, rot1, rot2, rot3):
+    def __init__(self, phase):
         """
+        Initiates the global phase.
+
         Args:
-        rot1 (float): first Euler angle, rotates around the Z axis;
-        rot2 (float): second Euler angle, rotates around the X axis;
-        rot3 (flat): third Euler angle, rotates around the Z axis.
+            phase (float): The global phase.
         """
         num_qubits = 1
-        array = [[np.cos(rot2/2), -np.exp(1j*rot3)*np.sin(rot2/2)],
-                 [np.exp(1j*rot1)*np.sin(rot2/2), np.exp(1j*(rot3+rot1))*np.cos(rot2/2)]]
+        array = np.array([[1,0],[0,1]])*np.exp(1j*phase)
         super().__init__(num_qubits, array)
-        self.rot1 = rot1
-        self.rot2 = rot2
-        self.rot3 = rot3
+        self.global_phase = phase
     
-    def get_angle(rotation_number):
+    def get_global_phase(self):
         """
-        Gives the angle of the rotation 'rot{rotation_number}', where the number designates which rotation this is.
+        Reads the global phase of the gate.
 
         Args:
-            number (int): number of rotation angle called.
+            None.
+        """
+        return self.global_phase
+
+
+class RotationGate(Gate):
+    """
+    Initiates a general rotation using the coordinates of the axis on the Bloch sphere,
+    and the rotation angle around that axis.
+
+    Attributes:
+        theta (float): Polar angle of axis on the Bloch sphere.
+        phi (float): Azimuthal angle of axis on the Bloch sphere.
+        alpha (float): Angle of rotation around the given axis.
+    """
+
+    def __init__(self, theta, phi, alpha):
+        """
+        Args:
+        theta (float): Polar angle of axis on the Bloch sphere.
+        phi (float): Azimuthal angle of axis on the Bloch sphere.
+        alpha (float): Angle of rotation around the given axis.
+        """
+
+        num_qubits = 1
+        array = [[np.exp(1j*alpha/2)*(np.sin(theta/2))**2 + np.exp(-1j*alpha/2)*(np.cos(theta/2))**2,
+                  -1j*np.sin(theta)*np.exp(-1j*phi)*np.sin(alpha/2)],
+                 [-1j*np.sin(theta)*np.exp(1j*phi)*np.sin(alpha/2),
+                  np.exp(1j*alpha/2)*(np.cos(theta/2))**2 + np.exp(-1j*alpha/2)*(np.sin(theta/2))**2]]
+        super().__init__(num_qubits, array)
+        self.theta = theta
+        self.phi = phi
+        self.alpha = alpha
+    
+    def get_rotation_axis(self):
+        """
+        Reads the rotation axis as a tuple(theta, phi). Equivalent to a point (theta, phi) on the Bloch sphere.
 
         Returns:
-            float: rotation angle.
+            tuple: The polar and azimuthal angles of the rotation axis.
         """
-        return eval('rot'+rotation_number)
+
+        return (self.theta, self.phi)
     
+    def get_rotation_angle(self):
+        """
+        Reads the rotation angle around the axis (theta, phi).
+
+        Returns:
+            float: Angle alpha of rotation around the rotation axis.
+        """
+
+        return self.alpha
+    
+class RxGate(RotationGate):
+    """
+    Rotation with specified angle along the x axis.
+    """
+    
+    def __init__(self, alpha):
+        """
+        Initiates an X-rotation.
+
+        Args:
+            alpha (float): Angle of rotation around the x axis.
+        """
+        super().__init__(np.pi/2, 0, alpha)
+
+
+class RyGate(RotationGate):
+    """
+    Rotation with specified angle along the y axis.
+    """
+    
+    def __init__(self, alpha):
+        """
+        Initiates an Y-rotation.
+
+        Args:
+            alpha (float): Angle of rotation around the y axis.
+        """
+        super().__init__(np.pi/2, np.pi/2, alpha)
+
+
+class RzGate(RotationGate):
+    """
+    Rotation with specified angle along the z axis.
+    """
+    
+    def __init__(self, alpha):
+        """
+        Initiates an Z-rotation.
+
+        Args:
+            alpha (float): Angle of rotation around the z axis.
+        """
+        super().__init__(0, 0, alpha)
+
+
+
 
 class PhaseGate(Gate):
     """
@@ -147,6 +256,7 @@ class PhaseGate(Gate):
         Args:
             phase (float): The input phase, must be a real number.
         """
+
         num_qubits = 1
         array = [[1,0],[0,np.exp(1j*phase)]]
         super().__init__(num_qubits, array)
@@ -154,9 +264,12 @@ class PhaseGate(Gate):
 
     def get_phase(self):
         """
+        Reads the phase of the phase gate.
+
         Returns:
-            float: the phase of the phase gate.
+            float: The phase of the phase gate.
         """
+
         return self.phase
 
     def set_phase(self, new_phase):
@@ -166,13 +279,16 @@ class PhaseGate(Gate):
         Args:
             new_phase (float): The new phase for the phase gate.
         """
+
         self.phase = new_phase
         self.array = [[1,0],[0,np.exp(1j*new_phase)]]
 
 
+# ===================================================
 # Two-qubit Gate child classes with input parameters:
 #   - ControlledGate2(Gate);
-#   - CNOTGate2(Gate).
+#   - CNOTGate2(ControlledGate2);
+#   - CPhaseGate2(ControlledGate2).
 
 
 class ControlledGate2(Gate):
@@ -180,17 +296,18 @@ class ControlledGate2(Gate):
     Controlled gate (custom) for 2 qubit systems, with the control from specified qubit.
 
     Attributes:
-        gate (Gate): must be a 1-qubit gate.
-        control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
+        gate (Gate): Must be a 1-qubit gate.
+        control (int): If 1, the control is the first qubit. If 2, the control is the second qubit.
     """
+
     def __init__(self, control, gate1):
         
         """
         Initiates the attributes of the controlled gate.
 
         Args:
-            gate (Gate): must be a 1-qubit gate.
-            control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.          
+            gate (Gate): Must be a 1-qubit gate.
+            control (int): If 1, the control is the first qubit. If 2, the control is the second qubit.          
         """
 
         num_qubits = 2
@@ -198,7 +315,7 @@ class ControlledGate2(Gate):
             raise ValueError('The gate is not a one-qubit gate.')
         U_gate = gate1.get_array()
         if control == 1:
-         array = [[1,0,0,0],[0,1,0,0],[0,0,U_gate[0,0],U_gate[0,1]],[0,0,U_gate[1,0],U_gate[1,1]]]
+            array = [[1,0,0,0],[0,1,0,0],[0,0,U_gate[0,0],U_gate[0,1]],[0,0,U_gate[1,0],U_gate[1,1]]]
         elif control == 2:
             array = [[1,0,0,0],[0,U_gate[0,0],0,U_gate[0,1]],[0,0,1,0],[0,U_gate[1,0],0,U_gate[1,1]]]
         super().__init__(num_qubits, array)
@@ -207,59 +324,94 @@ class ControlledGate2(Gate):
 
     def get_control(self):
         """
+        Reads the position of the control qubit.
+
         Returns:
-            int: the position of the control qubit (1 or 2).
+            int: The position of the control qubit (1 or 2).
         """
         return self.control
 
     def get_target_gate(self):
         """
+        Reads a copy of the target gate.
+
         Returns:
-            Gate: the target gate used in the control gate.
+            Gate: The target gate used in the control gate.
         """
-        copy = np.copy(self.target_gate)
-        return copy
+
+        target_array_copy = np.copy(self.target_gate.array)
+        target_gate_copy = Gate(1, target_array_copy)
+        return target_gate_copy
 
     
-class CNOTGate2(Gate):
+class CNOTGate2(ControlledGate2):
     """
     CNOT gate for 2 qubit systems, with the control from specified qubit.
     This is equivalent to "controlled_gate2(X_gate, control)".
-
-    Attributes:
-        control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
     """
+
     def __init__(self, control):
         """
         Initiates the attributes of the CNOT gate.
 
         Args:
-            control (int): if 1, the control is the first qubit. If 2, the control is the second qubit.
+            control (int): If 1, the control is the first qubit. If 2, the control is the second qubit.
         """
-        num_qubits = 2
-        if control == 1:
-         array = [[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]]
-        elif control == 2:
-            array = [[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]]
-        super().__init__(num_qubits, array)
-        self.control = control
-
-    def get_control(self):
-        """
-        Returns:
-            int: the position of the control qubit (1 or 2).
-        """
-        return self.control
+        x_gate = Gate(1, [[0,1],[1,0]])
+        super().__init__(control, x_gate)
     
 
+class CPhaseGate2(ControlledGate2):
+    """
+    CNOT gate for 2 qubit systems, with the control from specified qubit.
+    This is equivalent to "controlled_gate2(X_gate, control)".
+    """
+
+    def __init__(self, phase):
+        """
+        Initiates the attributes of the controlled phase gate.
+
+        Args:
+            phase (float): Gives the phase of the target phase gate.
+        """
+        phase_gate = Gate(1, [[1,0],[0,np.exp(1j*phase)]])
+        super().__init__(1, phase_gate)
+        self.target_phase = phase
+
+    
+    def get_target_phase(self):
+        """
+        Reads the phase of the controlled phase gate.
+
+        Returns:
+            float: Target phase.
+        """
+        return self.target_phase
+
+# ======================================================
 # One-qubit Gate child classes with no input parameters:
+#   - IdGate(Gate);
 #   - XGate(Gate);
 #   - YGate(Gate);
 #   - ZGate(Gate);
 #   - HGate(Gate);
 #   - SGate(Gate);
-#   - TGate(Gate).
+#   - TGate(Gate);
+#   - SqrtXGate(Gate).
 
+
+class IdGate(Gate):
+    """
+    Initiates the identity gate (used usually for tensor products).
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 1
+        array = [[1,0],[0,1]]
+        super().__init__(num_qubits, array)
 
 class XGate(Gate):
     """
@@ -268,6 +420,7 @@ class XGate(Gate):
     Args:
         None.
     """
+
     def __init__(self):
         num_qubits = 1
         array = [[0,1],[1,0]]
@@ -280,6 +433,7 @@ class YGate(Gate):
     Args:
         None.
     """
+
     def __init__(self):
         num_qubits = 1
         array = [[0,-1j],[1j,0]]
@@ -292,6 +446,7 @@ class ZGate(Gate):
     Args:
         None.
     """
+
     def __init__(self):
         num_qubits = 1
         array = [[1,0],[0,-1]]
@@ -304,6 +459,7 @@ class HGate(Gate):
     Args:
         None.
     """
+
     def __init__(self):
         num_qubits = 1
         array = np.array([[1,1],[1,-1]])/np.sqrt(2)
@@ -316,6 +472,7 @@ class SGate(Gate):
     Args:
         None.
     """
+    
     def __init__(self):
         num_qubits = 1
         array = [[1,0],[0,1j]]
@@ -328,28 +485,80 @@ class TGate(Gate):
     Args:
         None.
     """
+
     def __init__(self):
         num_qubits = 1
         array = [[1,0],[0,(1+1j)/np.sqrt(2)]]
         super().__init__(num_qubits, array)
 
-
-# Two-qubit Gate child classes with no input parameters:
-#   - SWAPGate2(Gate);
-#   - HHGate2(Gate);
-#   - FTGate2(Gate);
-
-
-class SWAPGate2(Gate):
+class SqrtXGate(Gate):
     """
-    Initiates a SWAP gate for 2 qubits.
+    Initiates an SX gate, which is the square root of X.
+    (SX)^2 = X.
     
     Args:
         None.
     """
+
+    def __init__(self):
+        num_qubits = 1
+        array = np.array([[1+1j,1-1J],[1-1J,1+1j]])/2
+        super().__init__(num_qubits, array)
+
+
+# ======================================================
+# Two-qubit Gate child classes with no input parameters:
+#   - XXGate2(Gate);
+#   - YYGate2(Gate);
+#   - ZZGate2(Gate);
+#   - HHGate2(Gate);
+#   - CZGate2(Gate);
+#   - CSGate2(Gate);
+#   - DCNOTGate2(Gate);
+#   - SWAPGate2(Gate);
+#   - ISWAPGate2(Gate);
+#   - SqrtSWAPGate2(Gate);
+#   - SqrtISWAPGate2(Gate);
+#   - FTGate2(Gate).
+
+
+class XXGate2(Gate):
+    """
+    Initiates a XxX gate.
+    
+    Args:
+        None.
+    """
+
     def __init__(self):
         num_qubits = 2
-        array = [[1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]]
+        array = [[0,0,0,1],[0,0,1,0],[0,1,0,0],[1,0,0,0]]
+        super().__init__(num_qubits, array)
+
+class YYGate2(Gate):
+    """
+    Initiates a XxX gate.
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 2
+        array = [[0,0,0,-1],[0,0,1,0],[0,1,0,0],[-1,0,0,0]]
+        super().__init__(num_qubits, array)
+
+class ZZGate2(Gate):
+    """
+    Initiates a XxX gate.
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,0,0,0],[0,-1,0,0],[0,0,-1,0],[0,0,0,1]]
         super().__init__(num_qubits, array)
 
 class HHGate2(Gate):
@@ -359,9 +568,103 @@ class HHGate2(Gate):
     Args:
         None.
     """
+
     def __init__(self):
         num_qubits = 2
-        array = [[1,1,1,1],[1,-1,1,-1],[1,1,-1,-1],[1,-1,-1,1]]
+        array = np.array([[1,1,1,1],[1,-1,1,-1],[1,1,-1,-1],[1,-1,-1,1]])/2
+        super().__init__(num_qubits, array)
+
+class CZGate2(Gate):
+    """
+    Initiates a CZ (controlled-Z) gate for 2 qubits.
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,-1]]
+        super().__init__(num_qubits, array)
+
+class CSGate2(Gate):
+    """
+    Initiates a CS (controlled-S) gate for 2 qubits.
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1j]]
+        super().__init__(num_qubits, array)
+
+class DCNOTGate2(Gate):
+    """
+    Initiates a DCNOT (double-CNOT) gate for 2 qubits.
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,0,0,0],[0,0,0,1],[0,1,0,0],[0,0,1,0]]
+        super().__init__(num_qubits, array)
+
+class SWAPGate2(Gate):
+    """
+    Initiates a SWAP gate for 2 qubits.
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]]
+        super().__init__(num_qubits, array)
+
+class ISWAPGate2(Gate):
+    """
+    Initiates an iSWAP gate for 2 qubits.
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,0,0,0],[0,0,1j,0],[0,1j,0,0],[0,0,0,1]]
+        super().__init__(num_qubits, array)
+
+class SqrtSWAPGate2(Gate):
+    """
+    Initiates a square root of the SWAP gate for 2 qubits.
+    (SqrtSWAP)^2 = SWAP.
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,0,0,0],[0,(1+1j)/2,(1-1j)/2,0],[0,(1-1j)/2,(1+1j)/2,0],[0,0,0,1]]
+        super().__init__(num_qubits, array)
+
+class SqrtISWAPGate2(Gate):
+    """
+    Initiates a square root of the iSWAP gate for 2 qubits.
+    (SqrtiSWAP)^2 = iSWAP.
+    
+    Args:
+        None.
+    """
+
+    def __init__(self):
+        num_qubits = 2
+        array = [[1,0,0,0],[0,0,1j,0],[0,1j,0,0],[0,0,0,1]]
         super().__init__(num_qubits, array)
 
 class FTGate2(Gate):
@@ -371,12 +674,14 @@ class FTGate2(Gate):
     Args:
         None.
     """
+
     def __init__(self):
         num_qubits = 2
-        array = [[1,1,1,1],[1,1j,-1,-1j],[1,-1,1,-1],[1,-1j,-1,1j]]
+        array = np.array([[1,1,1,1],[1,1j,-1,-1j],[1,-1,1,-1],[1,-1j,-1,1j]])/2
         super().__init__(num_qubits, array)
 
 
+# ===================================
 # Functions:
 #   - create_gate(num_qubits, array);
 #   - tensorprod(gate_list).
@@ -387,12 +692,11 @@ def create_gate(num_qubits, array):
     Creates a customised gate U. It needs to be unitary or scalable to unitary, in which case it is automatically scaled to a unitary matrix.
 
     Args:
-        num_qubits (int): the number of qubits that pass through the gate,
+        num_qubits (int): The number of qubits that pass through the gate.
         array (array_like): A 2^n by 2^n array of floats, where n = num_qubits (int) is the number of qubits.
     
     Returns:
-        Gate: the custom gate.
-
+        Gate: The custom gate.
     """
     
     gate = Gate(num_qubits, array)
@@ -410,12 +714,12 @@ def create_gate(num_qubits, array):
                             array is square, b- its size is (2^n x 2^n).')
     
     # Array must be unitary or scalable to a unitary matrix. For the latter case, it is rescaled to a unitary matrix.
-    check_identity = gate.array * gate.array.conj().T
+    check_identity = gate.array @ gate.array.conj().T
 
-    if np.array_equal(check_identity, np.identity(gate.num_qubits) * check_identity[0,0]):
+    if not np.all(np.isclose(check_identity, np.identity(2**gate.num_qubits) * check_identity[0,0])):
         raise ValueError('The gate is not unitary or scalable to unitary. Check for typos in the matrix elements.')
     elif check_identity[0,0] != 1:
-        gate.array /= np.sqrt(check_identity[0,0])
+        gate.array = gate.array / np.sqrt(check_identity[0,0])
     
     return gate
 
@@ -424,17 +728,17 @@ def tensorprod(gate_list):
     Calculates the tensor product of gates from a list.
 
     Args:
-        gate_list (list): list of Gate objects
+        gate_list (list): List of Gate objects.
     
     Returns:
-        Gate: resulting gate
+        Gate: Resulting gate.
     """
 
-    # test if input is a list of gates.
+    # Test if input is a list of gates.
     tester = 0
     for i in range(len(gate_list)):
         try:
-            tester += gate_list[i]
+            tester += gate_list[i].num_qubits
         except:
             raise TypeError(f'Entry {i} from the list is not a Gate object.')
 
@@ -447,5 +751,4 @@ def tensorprod(gate_list):
     
     tensor_gate = Gate(tensor_num_qubits, tensor_array)
     return tensor_gate
-
 
