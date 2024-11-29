@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gates module &mdash; ITS_us 0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=837179f8"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="states module" href="states.html" />
+    <link rel="prev" title="circuits module" href="circuits.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ITS_us
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ITS_us</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="circuits.html">circuits module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">gates module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gates.CNOT_gate2"><code class="docutils literal notranslate"><span class="pre">CNOT_gate2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.Gate"><code class="docutils literal notranslate"><span class="pre">Gate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gates.Gate.num_qubits"><code class="docutils literal notranslate"><span class="pre">Gate.num_qubits</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates.Gate.array"><code class="docutils literal notranslate"><span class="pre">Gate.array</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates.Gate.get_array"><code class="docutils literal notranslate"><span class="pre">Gate.get_array()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates.Gate.get_num_qubits"><code class="docutils literal notranslate"><span class="pre">Gate.get_num_qubits()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.controlled_gate2"><code class="docutils literal notranslate"><span class="pre">controlled_gate2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.create_gate"><code class="docutils literal notranslate"><span class="pre">create_gate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.phase_gate"><code class="docutils literal notranslate"><span class="pre">phase_gate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.tensorprod"><code class="docutils literal notranslate"><span class="pre">tensorprod()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="states.html">states module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="the_test_sphinx.html">Here is an example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ITS_us</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">ITS_us</a></li>
+      <li class="breadcrumb-item active">gates module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/gates.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-gates">
+<span id="gates-module"></span><h1>gates module<a class="headerlink" href="#module-gates" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="gates.CNOT_gate2">
+<span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">CNOT_gate2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.CNOT_gate2" title="Link to this definition"></a></dt>
+<dd><p>CNOT gate for 2 qubit systems, with the control from specified qubit.
+This is equivalent to “controlled_gate2(X_gate, control)”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>control</strong> (<em>int</em>) – if 1, the control is the first qubit. If 2, the control is the second qubit.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the CNOT gate.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gate object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.Gate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">Gate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_qubits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.Gate" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Gate object is an n-qubit gate represented in the standard basis.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gates.Gate.num_qubits">
+<span class="sig-name descname"><span class="pre">num_qubits</span></span><a class="headerlink" href="#gates.Gate.num_qubits" title="Link to this definition"></a></dt>
+<dd><p>The number of qubits that pass through the gate,</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gates.Gate.array">
+<span class="sig-name descname"><span class="pre">array</span></span><a class="headerlink" href="#gates.Gate.array" title="Link to this definition"></a></dt>
+<dd><p>2^n by 2^n array representing the gate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gates.Gate.get_array">
+<span class="sig-name descname"><span class="pre">get_array</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.Gate.get_array" title="Link to this definition"></a></dt>
+<dd><p>Reads the gate in matrix form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>copy of gate array</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gates.Gate.get_num_qubits">
+<span class="sig-name descname"><span class="pre">get_num_qubits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.Gate.get_num_qubits" title="Link to this definition"></a></dt>
+<dd><p>Reads the number of qubits that pass through the gate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>number of qubits</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gates.controlled_gate2">
+<span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">controlled_gate2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.controlled_gate2" title="Link to this definition"></a></dt>
+<dd><p>Controlled gate (custom) for 2 qubit systems, with the control from specified qubit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gate</strong> (<a class="reference internal" href="#gates.Gate" title="gates.Gate"><em>Gate</em></a>) – must be a 1-qubit gate.</p></li>
+<li><p><strong>control</strong> (<em>int</em>) – if 1, the control is the first qubit. If 2, the control is the second qubit.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the controlled gate.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gates.Gate" title="gates.Gate">Gate</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gates.create_gate">
+<span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">create_gate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_qubits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.create_gate" title="Link to this definition"></a></dt>
+<dd><p>Creates a customised gate U. It needs to be unitary or scalable to unitary, in which case it is automatically scaled to a unitary matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_qubits</strong> (<em>int</em>) – the number of qubits that pass through the gate,</p></li>
+<li><p><strong>array</strong> (<em>array_like</em>) – A 2^n by 2^n array of floats, where n = num_qubits (int) is the number of qubits.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the custom gate.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gates.Gate" title="gates.Gate">Gate</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gates.phase_gate">
+<span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">phase_gate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phase</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.phase_gate" title="Link to this definition"></a></dt>
+<dd><p>Creates a phase gate from a given input phase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>phase</strong> (<em>float</em>) – The input phase, must be a real number.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the corresponding phase gate.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gates.Gate" title="gates.Gate">Gate</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gates.tensorprod">
+<span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">tensorprod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gate_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.tensorprod" title="Link to this definition"></a></dt>
+<dd><p>Calculates the tensor product of gates from a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gate_list</strong> (<em>list</em>) – list of Gate objects</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>resulting gate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gates.Gate" title="gates.Gate">Gate</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="circuits.html" class="btn btn-neutral float-left" title="circuits module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="states.html" class="btn btn-neutral float-right" title="states module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Sara Cender, Theo Iosif, Ivan Shalashilin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
