@@ -6,7 +6,7 @@ States script:
 ==============
 
 - Normalises given initial states for N qubits.
-- Given angle(:math:'\theta,\phi'), it gives :math:'| \Psi >' state.
+- Given angle(:math:`\theta,\phi`), it gives :math:`| \Psi >` state.
 - Provides built-in initial states for 1 and 2 qubits.
 
 Dependencies:
@@ -148,12 +148,8 @@ class One(States):
         super().__init__(num_qubits, array)
 
 class Plus(States):
-    r"""
-    This function gives the state:
-
-    .. math::
-
-        |+> =  \frac{1}{\sqrt{2}}(|0> + |1>)
+    """
+    This function gives the |+> state:
 
     Returns:
         array : An array of numbers.
@@ -167,12 +163,8 @@ class Plus(States):
         super().__init__(num_qubits, array)
 
 class Minus(States):
-    r"""
-    This function gives the state:
-
-    .. math::
-
-        |-> =  \frac{1}{\sqrt{2}}(|0> - |1>)
+    """
+    This function gives the |-> state:
 
     Returns:
         array : An array of numbers.
@@ -186,12 +178,8 @@ class Minus(States):
         super().__init__(num_qubits, array)
 
 class PlusI(States):
-    r"""
-    This function gives the state:
-
-    .. math::
-
-        |i> =  \frac{1}{\sqrt{2}}(|0> + i|1>)
+    """
+    This function gives the |i> state.
 
     Returns:
         array : An array of numbers.
@@ -206,9 +194,7 @@ class PlusI(States):
 
 class MinusI(States):
     """
-    This function gives the state:
-    .. math::
-        |-i> =  \frac{1}{\sqrt{2}}(|0> - i|1>)
+    This function gives the |-i> state:
 
     Returns:
         array : An array of numbers.
@@ -338,7 +324,7 @@ def norm(N, coef_list):
 #Initial state formed from given angle theta and phi
 def angle(theta = 0, phi = 0):
     r"""
-    Takes angles :math:`\theta and \phi`, and outputs state: :math:`| \Psi > = cos(\frac{\theta}{2})|0> + sin(\frac{\theta}{2})e^(i\phi)|1>`.
+    Takes angles :math:`\theta \ and \ \phi`, and outputs state: :math:`| \Psi > = cos(\frac{\theta}{2})|0> + sin(\frac{\theta}{2})e^{i\phi}|1>`.
 
     Args:
         theta (int): Polar angle range from :math:`0< \theta < \pi`.
@@ -396,12 +382,12 @@ def tp(state_1, state_2):
 state = States()
 
 #Check
-state1 = norm(1, [3,5])
-state2 = norm(1, [8,2])
-print(norm(1, [1,8]))
-print(tp(state1, state2))
-print(angle(90,90))
-print(Zero().state)
-print(PhiPlus().state)
+# state1 = norm(1, [3,5])
+# state2 = norm(1, [8,2])
+# print(norm(1, [1,8]))
+# print(tp(state1, state2))
+# print(angle(90,90))
+# print(Zero().state)
+# print(PhiPlus().state)
 
 
