@@ -41,7 +41,7 @@ def test_Gate(num_qubits = 1, array = [[0,1],[1,0]]):
     assert not np.array_equal(array_copy, array)
 
 
-# ==========================
+# ===========================
 # test GlobalPhaseGate class
 #     - test get_global_phase
 
@@ -67,7 +67,7 @@ def test_GlobalPhase(phase = 1):
 
     
 
-# =======================
+# =============================
 # test RotationGate class
 #     - test get_rotation_axis
 #     - test get_rotation_angle
@@ -281,7 +281,7 @@ def test_CNOTGate2(control = 1):
     assert np.array_equal(probe_cnot_gate.array, reference_cnot_gate.array)
 
 
-# ===========
+# ===========================
 # test CPhaseGate2 class
 #     - test get_target_phase
 
