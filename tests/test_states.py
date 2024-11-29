@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import pytest
 import numpy as np
 import math, cmath
-from states import States, BuiltIn, tp
+from states import States, tp, angle, norm
 
 @pytest.fixture
 def test_norm():
@@ -16,10 +16,9 @@ def test_norm():
     Tests if norm method creates a normalised initial state correctly.
     """
     sqrt2 = 1/math.sqrt(2)
-    test_states = States()
-    s0 = test_states.norm(1,[1,0])
-    s1 = test_states.norm(1, [1, 1])
-    s2 = test_states.norm(2, [1, 1, 1, 1])
+    s0 = norm(1,[1,0])
+    s1 = norm(1, [1, 1])
+    s2 = norm(2, [1, 1, 1, 1])
     assert (s0 == np.array([[1],[0]])).all()
     assert (s1 == np.array([[sqrt2], [sqrt2]])).all()
     assert (s2 == np.array([[0.5],[0.5],[0.5],[0.5]])).all()
@@ -28,10 +27,9 @@ def test_angle():
     """
     Tests if angle method creates an initial state correctly.
     """
-    test_states = States()
-    s0 = test_states.angle(90,90)
-    s1 = test_states.angle(0,90)
-    s2 = test_states.angle(180, 45)
+    s0 = angle(90,90)
+    s1 = angle(0,90)
+    s2 = angle(180, 45)
     assert (s0 == np.array([[0.70710678+ 0.j],[0. + 0.70710678j]])).all()
     assert (s1 == np.array([[1.+0.j], [0.+0.j]])).all()
     assert (s2 == np.array([[0. +0.j], [0.70710678+0.70710678j]])).all()
