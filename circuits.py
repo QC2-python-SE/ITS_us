@@ -27,6 +27,12 @@ class Circuits:
         self.state = state_init
         self.gates = []
 
+        #checks on the input variables
+        if isinstance(state_init, States) == False:
+            raise TypeError("Initial state must be State type")
+        if N_wires != 1 or N_wires !=2:
+            raise TypeError("Number of wires must be 1 or 2")
+
         # check that the initial state has the correct dimension for the number of wires
         if np.log2(len(state_init)) != N_wires:
             raise ValueError("The initial state must be a power of 2.")
@@ -107,3 +113,6 @@ class Circuits:
         
     def measure_qubits():
         raise NotImplementedError
+
+
+ok = Circuits
