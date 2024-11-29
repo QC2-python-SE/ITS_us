@@ -373,12 +373,12 @@ def tp(state_1, state_2):
 state = States()
 
 #Check
-state1 = norm(1, [3,5])
-state2 = norm(1, [8,2])
-print(norm(1, [1,8]))
-print(tp(state1, state2))
-print(angle(90,90))
-print(Zero().state)
-print(PhiPlus().state)
+# state1 = norm(1, [3,5])
+# state2 = norm(1, [8,2])
+# print(norm(1, [1,8]))
+# print(tp(state1, state2))
+# print(angle(90,90))
+# print(Zero().state)
+# print(PhiPlus().state)
 
 

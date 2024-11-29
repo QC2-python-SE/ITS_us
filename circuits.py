@@ -15,13 +15,13 @@ Dependencies:
 
 
 import numpy as np
-from states import States, BuiltIn
+from states import *
 from gates import Gate
 
 
 class Circuits:
 
-    def __init__(self, N_wires=1, state_init=BuiltIn().zero()):
+    def __init__(self, N_wires=1, state_init= Zero()):
 
         self.N_wires = N_wires
         self.state = state_init
