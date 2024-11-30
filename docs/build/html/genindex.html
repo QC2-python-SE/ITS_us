@@ -13,7 +13,7 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=837179f8"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -47,6 +47,7 @@
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bell_circuit.html">Placeholder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="states_example.html">Examples of the application of states.py script.</a></li>
 </ul>
 
         </div>
@@ -78,9 +79,11 @@
 <div class="genindex-jumpbox">
  <a href="#A"><strong>A</strong></a>
  | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
@@ -102,6 +105,8 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.RotationGate.alpha">alpha (gates.RotationGate attribute)</a>
+</li>
       <li><a href="states.html#states.angle">angle() (in module states)</a>
 </li>
       <li><a href="gates.html#gates.Gate.array">array (gates.Gate attribute)</a>
@@ -123,17 +128,27 @@
 </li>
       <li><a href="gates.html#gates.CNOTGate2">CNOTGate2 (class in gates)</a>
 </li>
+      <li><a href="gates.html#gates.ControlledGate2.control">control (gates.ControlledGate2 attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gates.html#gates.CNOTGate2.control">control (gates.CNOTGate2 attribute)</a>
-
-      <ul>
-        <li><a href="gates.html#gates.ControlledGate2.control">(gates.ControlledGate2 attribute)</a>
-</li>
-      </ul></li>
       <li><a href="gates.html#gates.ControlledGate2">ControlledGate2 (class in gates)</a>
 </li>
+      <li><a href="gates.html#gates.CPhaseGate2">CPhaseGate2 (class in gates)</a>
+</li>
       <li><a href="gates.html#gates.create_gate">create_gate() (in module gates)</a>
+</li>
+      <li><a href="gates.html#gates.CSGate2">CSGate2 (class in gates)</a>
+</li>
+      <li><a href="gates.html#gates.CZGate2">CZGate2 (class in gates)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.DCNOTGate2">DCNOTGate2 (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -160,31 +175,37 @@
         <li><a href="gates.html#module-gates">module</a>
 </li>
       </ul></li>
-      <li><a href="gates.html#gates.RotationGate.get_angle">get_angle() (gates.RotationGate method)</a>
-</li>
       <li><a href="gates.html#gates.Gate.get_array">get_array() (gates.Gate method)</a>
 </li>
-      <li><a href="gates.html#gates.CNOTGate2.get_control">get_control() (gates.CNOTGate2 method)</a>
-
-      <ul>
-        <li><a href="gates.html#gates.ControlledGate2.get_control">(gates.ControlledGate2 method)</a>
+      <li><a href="gates.html#gates.ControlledGate2.get_control">get_control() (gates.ControlledGate2 method)</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="circuits.html#circuits.Circuits.get_gates">get_gates() (circuits.Circuits method)</a>
+</li>
+      <li><a href="gates.html#gates.GlobalPhaseGate.get_global_phase">get_global_phase() (gates.GlobalPhaseGate method)</a>
 </li>
       <li><a href="states.html#states.States.get_N">get_N() (states.States method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gates.html#gates.Gate.get_num_qubits">get_num_qubits() (gates.Gate method)</a>
 </li>
       <li><a href="gates.html#gates.PhaseGate.get_phase">get_phase() (gates.PhaseGate method)</a>
+</li>
+      <li><a href="gates.html#gates.RotationGate.get_rotation_angle">get_rotation_angle() (gates.RotationGate method)</a>
+</li>
+      <li><a href="gates.html#gates.RotationGate.get_rotation_axis">get_rotation_axis() (gates.RotationGate method)</a>
 </li>
       <li><a href="states.html#states.States.get_state">get_state() (states.States method)</a>
 </li>
       <li><a href="circuits.html#circuits.Circuits.get_state_init">get_state_init() (circuits.Circuits method)</a>
 </li>
       <li><a href="gates.html#gates.ControlledGate2.get_target_gate">get_target_gate() (gates.ControlledGate2 method)</a>
+</li>
+      <li><a href="gates.html#gates.CPhaseGate2.get_target_phase">get_target_phase() (gates.CPhaseGate2 method)</a>
+</li>
+      <li><a href="gates.html#gates.GlobalPhaseGate.global_phase">global_phase (gates.GlobalPhaseGate attribute)</a>
+</li>
+      <li><a href="gates.html#gates.GlobalPhaseGate">GlobalPhaseGate (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -197,6 +218,18 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gates.html#gates.HHGate2">HHGate2 (class in gates)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.IdGate">IdGate (class in gates)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.ISWAPGate2">ISWAPGate2 (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -255,12 +288,14 @@
 </li>
       <li><a href="gates.html#gates.PhaseGate">PhaseGate (class in gates)</a>
 </li>
-      <li><a href="states.html#states.PhiMinus">PhiMinus (class in states)</a>
+      <li><a href="gates.html#gates.RotationGate.phi">phi (gates.RotationGate attribute)</a>
 </li>
-      <li><a href="states.html#states.PhiPlus">PhiPlus (class in states)</a>
+      <li><a href="states.html#states.PhiMinus">PhiMinus (class in states)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="states.html#states.PhiPlus">PhiPlus (class in states)</a>
+</li>
       <li><a href="states.html#states.Plus">Plus (class in states)</a>
 </li>
       <li><a href="states.html#states.PlusI">PlusI (class in states)</a>
@@ -275,17 +310,17 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gates.html#gates.RotationGate.rot1">rot1 (gates.RotationGate attribute)</a>
-</li>
-      <li><a href="gates.html#gates.RotationGate.rot2">rot2 (gates.RotationGate attribute)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gates.html#gates.RotationGate.rot3">rot3 (gates.RotationGate attribute)</a>
-</li>
       <li><a href="gates.html#gates.RotationGate">RotationGate (class in gates)</a>
 </li>
       <li><a href="circuits.html#circuits.Circuits.run_circuit">run_circuit() (circuits.Circuits method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.RxGate">RxGate (class in gates)</a>
+</li>
+      <li><a href="gates.html#gates.RyGate">RyGate (class in gates)</a>
+</li>
+      <li><a href="gates.html#gates.RzGate">RzGate (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -297,10 +332,16 @@
 </li>
       <li><a href="gates.html#gates.SGate">SGate (class in gates)</a>
 </li>
-      <li><a href="circuits.html#circuits.Circuits.State_init">State_init (circuits.Circuits attribute)</a>
+      <li><a href="gates.html#gates.SqrtISWAPGate2">SqrtISWAPGate2 (class in gates)</a>
+</li>
+      <li><a href="gates.html#gates.SqrtSWAPGate2">SqrtSWAPGate2 (class in gates)</a>
+</li>
+      <li><a href="gates.html#gates.SqrtXGate">SqrtXGate (class in gates)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="circuits.html#circuits.Circuits.State_init">State_init (circuits.Circuits attribute)</a>
+</li>
       <li>
     states
 
@@ -320,9 +361,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gates.html#gates.tensorprod">tensorprod() (in module gates)</a>
 </li>
+      <li><a href="gates.html#gates.TGate">TGate (class in gates)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gates.html#gates.TGate">TGate (class in gates)</a>
+      <li><a href="gates.html#gates.RotationGate.theta">theta (gates.RotationGate attribute)</a>
 </li>
       <li><a href="states.html#states.tp">tp() (in module states)</a>
 </li>
@@ -335,12 +378,20 @@
       <li><a href="gates.html#gates.XGate">XGate (class in gates)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.XXGate2">XXGate2 (class in gates)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="Y">Y</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gates.html#gates.YGate">YGate (class in gates)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gates.html#gates.YYGate2">YYGate2 (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -353,6 +404,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gates.html#gates.ZGate">ZGate (class in gates)</a>
+</li>
+      <li><a href="gates.html#gates.ZZGate2">ZZGate2 (class in gates)</a>
 </li>
   </ul></td>
 </tr></table>

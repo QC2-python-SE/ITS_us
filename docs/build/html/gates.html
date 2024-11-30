@@ -14,7 +14,7 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=837179f8"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -50,16 +50,17 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">gates module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#gates-script">Gates script:</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#built-in-1-qubit-gates">Built-in 1 qubit gates:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#built-in-one-qubit-gates">Built-in one-qubit gates:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#built-in-2-qubit-gates">Built-in 2 qubit gates:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example-for-calling-gates">Example for calling gates:</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#gates.CNOTGate2"><code class="docutils literal notranslate"><span class="pre">CNOTGate2</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gates.CNOTGate2.control"><code class="docutils literal notranslate"><span class="pre">CNOTGate2.control</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gates.CNOTGate2.get_control"><code class="docutils literal notranslate"><span class="pre">CNOTGate2.get_control()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.CNOTGate2"><code class="docutils literal notranslate"><span class="pre">CNOTGate2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.CPhaseGate2"><code class="docutils literal notranslate"><span class="pre">CPhaseGate2</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gates.CPhaseGate2.get_target_phase"><code class="docutils literal notranslate"><span class="pre">CPhaseGate2.get_target_phase()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.CSGate2"><code class="docutils literal notranslate"><span class="pre">CSGate2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.CZGate2"><code class="docutils literal notranslate"><span class="pre">CZGate2</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.ControlledGate2"><code class="docutils literal notranslate"><span class="pre">ControlledGate2</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gates.ControlledGate2.gate"><code class="docutils literal notranslate"><span class="pre">ControlledGate2.gate</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gates.ControlledGate2.control"><code class="docutils literal notranslate"><span class="pre">ControlledGate2.control</span></code></a></li>
@@ -67,6 +68,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#gates.ControlledGate2.get_target_gate"><code class="docutils literal notranslate"><span class="pre">ControlledGate2.get_target_gate()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.DCNOTGate2"><code class="docutils literal notranslate"><span class="pre">DCNOTGate2</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.FTGate2"><code class="docutils literal notranslate"><span class="pre">FTGate2</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.Gate"><code class="docutils literal notranslate"><span class="pre">Gate</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gates.Gate.num_qubits"><code class="docutils literal notranslate"><span class="pre">Gate.num_qubits</span></code></a></li>
@@ -75,8 +77,15 @@
 <li class="toctree-l4"><a class="reference internal" href="#gates.Gate.get_num_qubits"><code class="docutils literal notranslate"><span class="pre">Gate.get_num_qubits()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.GlobalPhaseGate"><code class="docutils literal notranslate"><span class="pre">GlobalPhaseGate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gates.GlobalPhaseGate.global_phase"><code class="docutils literal notranslate"><span class="pre">GlobalPhaseGate.global_phase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates.GlobalPhaseGate.get_global_phase"><code class="docutils literal notranslate"><span class="pre">GlobalPhaseGate.get_global_phase()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.HGate"><code class="docutils literal notranslate"><span class="pre">HGate</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.HHGate2"><code class="docutils literal notranslate"><span class="pre">HHGate2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.ISWAPGate2"><code class="docutils literal notranslate"><span class="pre">ISWAPGate2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.IdGate"><code class="docutils literal notranslate"><span class="pre">IdGate</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.PhaseGate"><code class="docutils literal notranslate"><span class="pre">PhaseGate</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gates.PhaseGate.phase"><code class="docutils literal notranslate"><span class="pre">PhaseGate.phase</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gates.PhaseGate.get_phase"><code class="docutils literal notranslate"><span class="pre">PhaseGate.get_phase()</span></code></a></li>
@@ -84,18 +93,28 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.RotationGate"><code class="docutils literal notranslate"><span class="pre">RotationGate</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gates.RotationGate.rot1"><code class="docutils literal notranslate"><span class="pre">RotationGate.rot1</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gates.RotationGate.rot2"><code class="docutils literal notranslate"><span class="pre">RotationGate.rot2</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gates.RotationGate.rot3"><code class="docutils literal notranslate"><span class="pre">RotationGate.rot3</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gates.RotationGate.get_angle"><code class="docutils literal notranslate"><span class="pre">RotationGate.get_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates.RotationGate.theta"><code class="docutils literal notranslate"><span class="pre">RotationGate.theta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates.RotationGate.phi"><code class="docutils literal notranslate"><span class="pre">RotationGate.phi</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates.RotationGate.alpha"><code class="docutils literal notranslate"><span class="pre">RotationGate.alpha</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates.RotationGate.get_rotation_angle"><code class="docutils literal notranslate"><span class="pre">RotationGate.get_rotation_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gates.RotationGate.get_rotation_axis"><code class="docutils literal notranslate"><span class="pre">RotationGate.get_rotation_axis()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.RxGate"><code class="docutils literal notranslate"><span class="pre">RxGate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.RyGate"><code class="docutils literal notranslate"><span class="pre">RyGate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.RzGate"><code class="docutils literal notranslate"><span class="pre">RzGate</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.SGate"><code class="docutils literal notranslate"><span class="pre">SGate</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.SWAPGate2"><code class="docutils literal notranslate"><span class="pre">SWAPGate2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.SqrtISWAPGate2"><code class="docutils literal notranslate"><span class="pre">SqrtISWAPGate2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.SqrtSWAPGate2"><code class="docutils literal notranslate"><span class="pre">SqrtSWAPGate2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.SqrtXGate"><code class="docutils literal notranslate"><span class="pre">SqrtXGate</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.TGate"><code class="docutils literal notranslate"><span class="pre">TGate</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.XGate"><code class="docutils literal notranslate"><span class="pre">XGate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.XXGate2"><code class="docutils literal notranslate"><span class="pre">XXGate2</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.YGate"><code class="docutils literal notranslate"><span class="pre">YGate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.YYGate2"><code class="docutils literal notranslate"><span class="pre">YYGate2</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.ZGate"><code class="docutils literal notranslate"><span class="pre">ZGate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gates.ZZGate2"><code class="docutils literal notranslate"><span class="pre">ZZGate2</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.create_gate"><code class="docutils literal notranslate"><span class="pre">create_gate()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gates.tensorprod"><code class="docutils literal notranslate"><span class="pre">tensorprod()</span></code></a></li>
 </ul>
@@ -107,6 +126,7 @@
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bell_circuit.html">Placeholder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="states_example.html">Examples of the application of states.py script.</a></li>
 </ul>
 
         </div>
@@ -150,62 +170,103 @@
 <li><p>numpy</p></li>
 </ul>
 </section>
-<section id="built-in-1-qubit-gates">
-<h3>Built-in 1 qubit gates:<a class="headerlink" href="#built-in-1-qubit-gates" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>X_gate: X gate.</p></li>
-<li><p>Y_gate: Y gate.</p></li>
-<li><p>Z_gate: Z gate.</p></li>
-<li><p>H_gate: Hadamard gate.</p></li>
-<li><p>S_gate: S gate.</p></li>
-<li><p>T_gate: T gate.</p></li>
+<section id="built-in-one-qubit-gates">
+<h3>Built-in one-qubit gates:<a class="headerlink" href="#built-in-one-qubit-gates" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>GlobalPhaseGate(phase): gate that adds a global phase &lt;phase&gt; to the system;</p></li>
+<li><p>RotationGate(theta, phi, alpha): rotation of angle &lt;alpha&gt; around an axis on the Bloch sphere &lt;(theta, phi)&gt;</p></li>
+<li><p>RxGate(alpha): rotation of angle &lt;alpha&gt; around the x axis;</p></li>
+<li><p>RyGate(alpha): rotation of angle &lt;alpha&gt; around the y axis;</p></li>
+<li><p>RzGate(alpha): rotation of angle &lt;alpha&gt; around the z axis;</p></li>
+<li><p>PhaseGate(phase): phase gate on the second register with phase &lt;phase&gt;.</p></li>
+<li><p>IdGate(): identity gate;</p></li>
+<li><p>XGate(): X gate;</p></li>
+<li><p>YGate(): Y gate;</p></li>
+<li><p>ZGate(): Z gate;</p></li>
+<li><p>HGate(): Hadamard gate;</p></li>
+<li><p>SGate(): S gate;</p></li>
+<li><p>TGate(): T gate;</p></li>
+<li><p>SqrtXGate(): square root of X gate.</p></li>
 </ul>
+</div></blockquote>
 </section>
 <section id="built-in-2-qubit-gates">
 <h3>Built-in 2 qubit gates:<a class="headerlink" href="#built-in-2-qubit-gates" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>CNOT_gate2(control): CNOT gate with specified control.</p></li>
-<li><p>SWAP_gate2: SWAP gate.</p></li>
-<li><p>HH_gate2: double Hadamard gate (Hadamard on each qubit).</p></li>
-<li><p>FT_gate2: Quantum Fourier Transform gate on 2 qubits.</p></li>
+<blockquote>
+<div><ul class="simple">
+<li><p>ControlledGate2(control, gate1): general controlled gate where the target &lt;gate1&gt; is controlled by qubit at position &lt;control&gt;;</p></li>
+<li><p>CNOTGate2(control): CNOT gate with the control qubit on position &lt;control&gt;;</p></li>
+<li><p>CPhaseGate2(phase): controlled phase gate with phase &lt;phase&gt;.</p></li>
+<li><p>XXGate2(): XxX gate;</p></li>
+<li><p>YYGate2(): YxY gate;</p></li>
+<li><p>ZZGate2(): ZxZ gate;</p></li>
+<li><p>HHGate2(): HxH gate;</p></li>
+<li><p>CZGate2(): control-Z gate;</p></li>
+<li><p>CSGate2(): control-S gate;</p></li>
+<li><p>DCNOTGate2(): double CNOT gate;</p></li>
+<li><p>SWAPGate2(): SWAP gate;</p></li>
+<li><p>ISWAPGate2():iSWAP gate;</p></li>
+<li><p>SqrtSWAPGate2(): square root of SWAP gate;</p></li>
+<li><p>SqrtISWAPGate2(): square root of iSWAP gate;</p></li>
+<li><p>FTGate2(): Quantum Fourier Transform gate.</p></li>
 </ul>
-</section>
-<section id="example-for-calling-gates">
-<h3>Example for calling gates:<a class="headerlink" href="#example-for-calling-gates" title="Link to this heading"></a></h3>
-<p>x       = gates.X_gate          # produces instance of an X gate.
-cnot1   = gates.CNOT_gate2(1)   # produces instance of a CNOT gate with control on the first qubit.</p>
+</div></blockquote>
+<p>For more details about the gates (such as their matrix form), check <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_quantum_logic_gates">https://en.wikipedia.org/wiki/List_of_quantum_logic_gates</a>.</p>
 </section>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="gates.CNOTGate2">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">CNOTGate2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.CNOTGate2" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#gates.ControlledGate2" title="gates.ControlledGate2"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlledGate2</span></code></a></p>
 <p>CNOT gate for 2 qubit systems, with the control from specified qubit.
 This is equivalent to “controlled_gate2(X_gate, control)”.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="gates.CNOTGate2.control">
-<span class="sig-name descname"><span class="pre">control</span></span><a class="headerlink" href="#gates.CNOTGate2.control" title="Link to this definition"></a></dt>
-<dd><p>if 1, the control is the first qubit. If 2, the control is the second qubit.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.CPhaseGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">CPhaseGate2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phase</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.CPhaseGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.ControlledGate2" title="gates.ControlledGate2"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlledGate2</span></code></a></p>
+<p>CNOT gate for 2 qubit systems, with the control from specified qubit.
+This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="gates.CNOTGate2.get_control">
-<span class="sig-name descname"><span class="pre">get_control</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.CNOTGate2.get_control" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dt class="sig sig-object py" id="gates.CPhaseGate2.get_target_phase">
+<span class="sig-name descname"><span class="pre">get_target_phase</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.CPhaseGate2.get_target_phase" title="Link to this definition"></a></dt>
+<dd><p>Reads the phase of the controlled phase gate.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the position of the control qubit (1 or 2).</p>
+<dd class="field-odd"><p>Target phase.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.CSGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">CSGate2</span></span><a class="headerlink" href="#gates.CSGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates a CS (controlled-S) gate for 2 qubits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.CZGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">CZGate2</span></span><a class="headerlink" href="#gates.CZGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates a CZ (controlled-Z) gate for 2 qubits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
@@ -216,7 +277,7 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gates.ControlledGate2.gate">
 <span class="sig-name descname"><span class="pre">gate</span></span><a class="headerlink" href="#gates.ControlledGate2.gate" title="Link to this definition"></a></dt>
-<dd><p>must be a 1-qubit gate.</p>
+<dd><p>Must be a 1-qubit gate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#gates.Gate" title="gates.Gate">Gate</a></p>
@@ -227,7 +288,7 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gates.ControlledGate2.control">
 <span class="sig-name descname"><span class="pre">control</span></span><a class="headerlink" href="#gates.ControlledGate2.control" title="Link to this definition"></a></dt>
-<dd><p>if 1, the control is the first qubit. If 2, the control is the second qubit.</p>
+<dd><p>If 1, the control is the first qubit. If 2, the control is the second qubit.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
@@ -238,9 +299,10 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gates.ControlledGate2.get_control">
 <span class="sig-name descname"><span class="pre">get_control</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.ControlledGate2.get_control" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Reads the position of the control qubit.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the position of the control qubit (1 or 2).</p>
+<dd class="field-odd"><p>The position of the control qubit (1 or 2).</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
@@ -251,9 +313,10 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gates.ControlledGate2.get_target_gate">
 <span class="sig-name descname"><span class="pre">get_target_gate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.ControlledGate2.get_target_gate" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Reads a copy of the target gate.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the target gate used in the control gate.</p>
+<dd class="field-odd"><p>The target gate used in the control gate.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#gates.Gate" title="gates.Gate">Gate</a></p>
@@ -261,6 +324,18 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.DCNOTGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">DCNOTGate2</span></span><a class="headerlink" href="#gates.DCNOTGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates a DCNOT (double-CNOT) gate for 2 qubits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
@@ -308,7 +383,7 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dd><p>Reads the gate in matrix form.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>copy of gate array</p>
+<dd class="field-odd"><p>Copy of gate array.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>ndarray</p>
@@ -322,10 +397,39 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dd><p>Reads the number of qubits that pass through the gate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>number of qubits</p>
+<dd class="field-odd"><p>Number of qubits.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.GlobalPhaseGate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">GlobalPhaseGate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phase</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.GlobalPhaseGate" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Global phase gate with given phase.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gates.GlobalPhaseGate.global_phase">
+<span class="sig-name descname"><span class="pre">global_phase</span></span><a class="headerlink" href="#gates.GlobalPhaseGate.global_phase" title="Link to this definition"></a></dt>
+<dd><p>the global phase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gates.GlobalPhaseGate.get_global_phase">
+<span class="sig-name descname"><span class="pre">get_global_phase</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.GlobalPhaseGate.get_global_phase" title="Link to this definition"></a></dt>
+<dd><p>Reads the global phase of the gate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
 </dd>
 </dl>
 </dd></dl>
@@ -357,6 +461,30 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="gates.ISWAPGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">ISWAPGate2</span></span><a class="headerlink" href="#gates.ISWAPGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates an iSWAP gate for 2 qubits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.IdGate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">IdGate</span></span><a class="headerlink" href="#gates.IdGate" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates the identity gate (used usually for tensor products).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="gates.PhaseGate">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">PhaseGate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phase</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.PhaseGate" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
@@ -375,9 +503,10 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gates.PhaseGate.get_phase">
 <span class="sig-name descname"><span class="pre">get_phase</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.PhaseGate.get_phase" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Reads the phase of the phase gate.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the phase of the phase gate.</p>
+<dd class="field-odd"><p>The phase of the phase gate.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>float</p>
@@ -400,13 +529,14 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="gates.RotationGate">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">RotationGate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rot1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rot3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.RotationGate" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">RotationGate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.RotationGate" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
-<p>Initiates a general rotation using the Euler angles.</p>
+<p>Initiates a general rotation using the coordinates of the axis on the Bloch sphere,
+and the rotation angle around that axis.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="gates.RotationGate.rot1">
-<span class="sig-name descname"><span class="pre">rot1</span></span><a class="headerlink" href="#gates.RotationGate.rot1" title="Link to this definition"></a></dt>
-<dd><p>first Euler angle, rotates around the Z axis;</p>
+<dt class="sig sig-object py" id="gates.RotationGate.theta">
+<span class="sig-name descname"><span class="pre">theta</span></span><a class="headerlink" href="#gates.RotationGate.theta" title="Link to this definition"></a></dt>
+<dd><p>Polar angle of axis on the Bloch sphere.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -415,9 +545,9 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="gates.RotationGate.rot2">
-<span class="sig-name descname"><span class="pre">rot2</span></span><a class="headerlink" href="#gates.RotationGate.rot2" title="Link to this definition"></a></dt>
-<dd><p>second Euler angle, rotates around the X axis;</p>
+<dt class="sig sig-object py" id="gates.RotationGate.phi">
+<span class="sig-name descname"><span class="pre">phi</span></span><a class="headerlink" href="#gates.RotationGate.phi" title="Link to this definition"></a></dt>
+<dd><p>Azimuthal angle of axis on the Bloch sphere.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -426,33 +556,65 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="gates.RotationGate.rot3">
-<span class="sig-name descname"><span class="pre">rot3</span></span><a class="headerlink" href="#gates.RotationGate.rot3" title="Link to this definition"></a></dt>
-<dd><p>third Euler angle, rotates around the Z axis.</p>
+<dt class="sig sig-object py" id="gates.RotationGate.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><a class="headerlink" href="#gates.RotationGate.alpha" title="Link to this definition"></a></dt>
+<dd><p>Angle of rotation around the given axis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>flat</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="gates.RotationGate.get_angle">
-<span class="sig-name descname"><span class="pre">get_angle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.RotationGate.get_angle" title="Link to this definition"></a></dt>
-<dd><p>Gives the angle of the rotation ‘rot{rotation_number}’, where the number designates which rotation this is.</p>
+<dt class="sig sig-object py" id="gates.RotationGate.get_rotation_angle">
+<span class="sig-name descname"><span class="pre">get_rotation_angle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.RotationGate.get_rotation_angle" title="Link to this definition"></a></dt>
+<dd><p>Reads the rotation angle around the axis (theta, phi).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>number</strong> (<em>int</em>) – number of rotation angle called.</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Angle alpha of rotation around the rotation axis.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>rotation angle.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="gates.RotationGate.get_rotation_axis">
+<span class="sig-name descname"><span class="pre">get_rotation_axis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gates.RotationGate.get_rotation_axis" title="Link to this definition"></a></dt>
+<dd><p>Reads the rotation axis as a tuple(theta, phi). Equivalent to a point (theta, phi) on the Bloch sphere.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The polar and azimuthal angles of the rotation axis.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.RxGate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">RxGate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.RxGate" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.RotationGate" title="gates.RotationGate"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotationGate</span></code></a></p>
+<p>Rotation with specified angle along the x axis.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.RyGate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">RyGate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.RyGate" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.RotationGate" title="gates.RotationGate"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotationGate</span></code></a></p>
+<p>Rotation with specified angle along the y axis.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.RzGate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">RzGate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.RzGate" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.RotationGate" title="gates.RotationGate"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotationGate</span></code></a></p>
+<p>Rotation with specified angle along the z axis.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -472,6 +634,45 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">SWAPGate2</span></span><a class="headerlink" href="#gates.SWAPGate2" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
 <p>Initiates a SWAP gate for 2 qubits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.SqrtISWAPGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">SqrtISWAPGate2</span></span><a class="headerlink" href="#gates.SqrtISWAPGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates a square root of the iSWAP gate for 2 qubits.
+(SqrtiSWAP)^2 = iSWAP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.SqrtSWAPGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">SqrtSWAPGate2</span></span><a class="headerlink" href="#gates.SqrtSWAPGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates a square root of the SWAP gate for 2 qubits.
+(SqrtSWAP)^2 = SWAP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.SqrtXGate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">SqrtXGate</span></span><a class="headerlink" href="#gates.SqrtXGate" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates an SX gate, which is the square root of X.
+(SX)^2 = X.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>None.</strong></p>
@@ -504,10 +705,34 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="gates.XXGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">XXGate2</span></span><a class="headerlink" href="#gates.XXGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates a XxX gate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="gates.YGate">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">YGate</span></span><a class="headerlink" href="#gates.YGate" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
 <p>Initiates a Y gate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.YYGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">YYGate2</span></span><a class="headerlink" href="#gates.YYGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates a XxX gate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>None.</strong></p>
@@ -527,6 +752,18 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 </dl>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="gates.ZZGate2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">ZZGate2</span></span><a class="headerlink" href="#gates.ZZGate2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gates.Gate" title="gates.Gate"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gate</span></code></a></p>
+<p>Initiates a XxX gate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None.</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="gates.create_gate">
 <span class="sig-prename descclassname"><span class="pre">gates.</span></span><span class="sig-name descname"><span class="pre">create_gate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_qubits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gates.create_gate" title="Link to this definition"></a></dt>
@@ -534,12 +771,12 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>num_qubits</strong> (<em>int</em>) – the number of qubits that pass through the gate,</p></li>
+<li><p><strong>num_qubits</strong> (<em>int</em>) – The number of qubits that pass through the gate.</p></li>
 <li><p><strong>array</strong> (<em>array_like</em>) – A 2^n by 2^n array of floats, where n = num_qubits (int) is the number of qubits.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>the custom gate.</p>
+<dd class="field-even"><p>The custom gate.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#gates.Gate" title="gates.Gate">Gate</a></p>
@@ -553,10 +790,10 @@ This is equivalent to “controlled_gate2(X_gate, control)”.</p>
 <dd><p>Calculates the tensor product of gates from a list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gate_list</strong> (<em>list</em>) – list of Gate objects</p>
+<dd class="field-odd"><p><strong>gate_list</strong> (<em>list</em>) – List of Gate objects.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>resulting gate</p>
+<dd class="field-even"><p>Resulting gate.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#gates.Gate" title="gates.Gate">Gate</a></p>
