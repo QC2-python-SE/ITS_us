@@ -19,3 +19,4 @@ Welcome to the documentation!
    :caption: Examples
 
    bell_circuit.ipynb
+   states_example.ipynb
