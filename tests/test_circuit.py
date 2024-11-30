@@ -7,8 +7,7 @@ import numpy as np
 from states import *
 from gates import *
 from circuits import Circuits
-import pytest
-
+import random
 
 def test_add_single_gates():
     """
@@ -130,3 +129,96 @@ def test_prepare_bell():
     final_state = circuit.run_circuit()
 
     assert np.abs(np.sum(final_state.get_state() - state_to_check.get_state())) < 10e-10
+
+
+def test_getfinal_isnonetype():
+    """
+    Asserts that if measurement is not run, the get_state_final is a nonetype
+    """
+    circuit = Circuits()
+    assert circuit.get_state_final() is None
+
+
+def test_runcircuit_identity():
+    """
+    Tests whether adding no gates to the circuit will still run the circuit for N = 1 or
+    2 wires
+    """
+    circuit = Circuits()
+    circuit.run_circuit()  # passing no gates to the circuit
+    state_tocheck = np.array([1, 0]).reshape(-1,1)
+    assert (circuit.get_state_final()==state_tocheck).all()
+
+    circuit = Circuits(N_wires=2, state_init=States(N=2, state=tp([1,0],[1,0])))
+    circuit.run_circuit()
+    state_tocheck = np.array([1,0,0,0]).reshape(-1,1)
+    assert (circuit.get_state_final() ==state_tocheck).all()
+
+
+
+def test_circuit_ran_flag():
+    """
+    Tests if the circuit is ran flag changes form False to True after running the circuit
+    """
+    circuit = Circuits()
+    assert circuit.circuit_ran == False
+    circuit.run_circuit()
+    assert circuit.circuit_ran == True
+
+def test_measurement_collapse_one_wire():
+    """
+    Asserts the final measurement outcome after appying X|0>=|1>
+    """
+    #construct initial states
+    state_init = States()
+    state_tocheck = States(1, np.array([0,1]))
+    #construct circuit
+    circuit = Circuits()
+    circuit.add_single_qubit_gate(XGate())
+    #run and measure
+    circuit.run_circuit()
+    outcome = circuit.measure_qubits()
+    assert (state_tocheck.get_state() == outcome.get_state()).all()
+
+
+def test_measurement_collapse_two_wires():
+    """
+    Asserts the final measurement outcome after appying CNOT|11>=|10> is |10>
+    """
+    #construct initial state
+    state_init = States(2, np.array([0,0,0,1]))
+    state_tocheck = States(2, np.array([0,0,1,0]))
+    #construct circuit
+    circuit = Circuits(N_wires=2, state_init=state_init)
+    circuit.add_two_qubit_gate(CNOTGate2(control=1), [0,1])
+    #run and measure
+    circuit.run_circuit()
+    outcome = circuit.measure_qubits()
+    assert (state_tocheck.get_state() == outcome.get_state()).all()
+
+
+def test_seed():
+
+    """
+    Asserts random seed can be set for measurement outcomes
+
+    Runs circuit H|0> = |+> gives the same measurement outcome for a particular seed
+    
+    """
+    seed = 1
+    
+    #construct circuit
+    circuit = Circuits()
+    circuit.add_single_qubit_gate(HGate())
+
+    circuit.run_circuit()
+    state_init = circuit.measure_qubits(seed=seed).get_state()
+    
+    #run 100 shots with the same seed to ensure the outcome is identical
+    
+    for i in range(100):
+        circuit = Circuits()
+        circuit.add_single_qubit_gate(HGate())
+        circuit.run_circuit()
+        state_tocheck = circuit.measure_qubits(seed=seed).get_state()
+        assert (state_init==state_tocheck).all()
