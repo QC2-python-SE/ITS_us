@@ -18,7 +18,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../../'))
 html_theme = 'sphinx_rtd_theme'
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'nbsphinx']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'nbsphinx', 'sphinx.ext.mathjax']
 
 
 templates_path = ['_templates']

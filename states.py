@@ -8,6 +8,7 @@ States script:
 - Normalises given initial states for N qubits.
 - Given angle(:math:`\theta,\phi`), it gives :math:`| \Psi >` state.
 - Provides built-in initial states for 1 and 2 qubits.
+- Performs tensor product for any state.
 
 Dependencies:
 ~~~~~~~~~~~~~
@@ -92,7 +93,7 @@ class States:
         Initiates the States class.
 
         Args:
-            N (int): The number of qubits that pass through the gate,
+            N (int): The number of qubits that pass through the state,
             array (array_like): A 2^N by 2^N array of floats, where N (int) is the number of qubits.
         """
         self.N = N
@@ -110,7 +111,7 @@ class States:
     
     def get_N(self):
         """
-        Reads the number of qubits that pass through the gate.
+        Reads the number of qubits that pass through the state.
 
         Returns:
             int: number of qubits
@@ -273,7 +274,6 @@ class PhiMinus(States):
 
 #Initial Normalised State Function
 def norm(N, coef_list):
-
     """
     Takes a coefficients list:
         1. Checks if list contains only complex numbers with the real and imaginary parts being type integer or float. 
@@ -376,7 +376,6 @@ def tp(state_1, state_2):
         raise TypeError("The length of each initial state list for states 1 and 2 should be 2.")
     return tp_state
 
-        
 
 #Calling states
 state = States()
