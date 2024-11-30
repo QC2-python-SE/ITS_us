@@ -107,6 +107,11 @@ class States:
             ndarray: copy of state array
         """
         copy = np.copy(self.state)
+
+        #Checks if length of the state for N qubits is 2^N or else gives error and suggested correction.
+        if len(copy) != 2**self.N:
+            raise TypeError("The length of initial states list for " + str(self.N) + " qubit(s) is not " + str(len(copy))+ ". It should be equal to " + str(2**self.N) +".")
+        
         return copy
     
     def get_N(self):
