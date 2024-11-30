@@ -12,6 +12,7 @@ Dependencies:
 - gates
 - states
 - copy
+- random
 
 """
 
@@ -19,6 +20,7 @@ import numpy as np
 from states import *
 from gates import Gate
 from copy import deepcopy
+from random import choices
 
 
 class Circuits:
@@ -35,7 +37,9 @@ class Circuits:
 
         self.N_wires = N_wires
         self.state_init = state_init
+        self.state_final = None  # NoneType update after circuit_ran method
         self.gates = []
+        self.circuit_ran = True
 
         # checks on the input variables
         if isinstance(state_init, States) == False:
@@ -55,7 +59,7 @@ class Circuits:
 
         Returns:
             list: a list of tuples ([i], gate), where [i] is a list indicating which
-            wire the circuit is on and gate is the Gate object 
+            wire the circuit is on and gate is the Gate object
         """
         return self.gates
 
@@ -68,6 +72,22 @@ class Circuits:
 
         """
         return self.state_init.get_state()
+
+    def get_state_final(self):
+        """
+        Returns the final quantum state after running circuit. If the
+        circuit has not been called, returns a NoneType with a warning message
+
+        Returns:
+            array: The final state as a numpy array
+            NoneType: If the circuit has not been run
+
+        """
+        if self.state_final is None:
+            print("Warning: Circuit has not been run, returning NoneType")
+            return None
+
+        return self.state_final
 
     def add_single_qubit_gate(self, gate: Gate, target_wire: int = 0):
         """
@@ -134,7 +154,42 @@ class Circuits:
 
             state_array = N_wire_gate @ state_array
 
-        return States(state=state_array, N=self.N_wires)
+        # override previous class variables
+        self.circuit_ran = True
+        self.state_final = States(state=state_array, N=self.N_wires)
+        return self.state_final
 
-    def measure_qubits():
-        raise NotImplementedError
+    def measure_qubits(self):
+        """
+        Applies a projection operator in the computational Z basis to the final state with
+        a probability distribution constructed from the final states' amplitudes, also
+        in the Z basis. Collapses the final state into a basis state of the computational
+        basis, overwriting it and destroying its quantum information.
+
+        Returns:
+            NoneType: The measurement is not been performed if the circuit has not
+            been run
+            States: The final projected state. Calling this function overwrites the
+            final state post-application of the quantum circuit.
+
+        """
+        # return NoneType
+        if not self.circuit_ran:
+            print("The circuit has not been run - no measurement performed")
+            return None
+
+        # construct final probability distribution as an array of P(i) = |<i|psi>|**2
+        distribution = self.state_final.get_state() * np.conj(
+            self.state_final.get_state()
+        )
+
+        # construct binary outcome list and randomly choose the outcome
+        outcome_sequence = np.arange(2**self.N_wires)
+        outcome = choices(outcome_sequence, weights=distribution, k=1)
+
+        # construct the final state array
+        state_array = np.zeros(2**self.N_wires)
+        state_array[outcome] = 1
+        print(f"Final measurement outcome is{format(outcome, 'b')}")
+        self.state_final = States(N=1, array=state_array)
+        return self.state_final
