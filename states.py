@@ -225,7 +225,7 @@ class PsiPlus(States):
         None.
     """
     def __init__(self):
-        num_qubits = 1
+        num_qubits = 2
         array = (1/math.sqrt(2))*((np.kron(Zero().state, One().state) + np.kron(One().state, Zero().state)))
         super().__init__(num_qubits, array)
 
@@ -240,7 +240,7 @@ class PsiMinus(States):
         None.
     """
     def __init__(self):
-        num_qubits = 1
+        num_qubits = 2
         array = (1/math.sqrt(2))*((np.kron(Zero().state, One().state) - np.kron(One().state, Zero().state)))
         super().__init__(num_qubits, array)
 
@@ -255,7 +255,7 @@ class PhiPlus(States):
         None.
     """
     def __init__(self):
-        num_qubits = 1
+        num_qubits = 2
         array = (1/math.sqrt(2))*((np.kron(Zero().state, Zero().state) + np.kron(One().state, One().state)))
         super().__init__(num_qubits, array)
 
@@ -270,7 +270,7 @@ class PhiMinus(States):
         None.
     """
     def __init__(self):
-        num_qubits = 1
+        num_qubits = 2
         array = (1/math.sqrt(2))*((np.kron(Zero().state, Zero().state) - np.kron(One().state, One().state)))
         super().__init__(num_qubits, array)
 
