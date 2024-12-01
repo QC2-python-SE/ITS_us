@@ -57,6 +57,7 @@ For more details about the gates (such as their matrix form), check https://en.w
 """
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 
 # =================
@@ -73,7 +74,7 @@ class Gate(object):
         array (ndarray): 2^n by 2^n array representing the gate.
     """
 
-    def __init__(self, num_qubits, array):
+    def __init__(self, num_qubits: int, array: ArrayLike):
         """
         Initiates the Gate class.
 
@@ -85,7 +86,7 @@ class Gate(object):
         self.num_qubits = num_qubits
         self.array = np.array(array)
 
-    def get_num_qubits(self):
+    def get_num_qubits(self) -> int:
         """
         Reads the number of qubits that pass through the gate.
 
@@ -95,7 +96,7 @@ class Gate(object):
 
         return self.num_qubits
 
-    def get_array(self):
+    def get_array(self) -> np.ndarray:
         """
         Reads the gate in matrix form.
 
@@ -123,7 +124,7 @@ class GlobalPhaseGate(Gate):
     Attributes:
         global_phase (float): the global phase.
     """
-    def __init__(self, phase):
+    def __init__(self, phase: float):
         """
         Initiates the global phase.
 
@@ -135,7 +136,7 @@ class GlobalPhaseGate(Gate):
         super().__init__(num_qubits, array)
         self.global_phase = phase
     
-    def get_global_phase(self):
+    def get_global_phase(self) -> float:
         """
         Reads the global phase of the gate.
 
@@ -156,7 +157,7 @@ class RotationGate(Gate):
         alpha (float): Angle of rotation around the given axis.
     """
 
-    def __init__(self, theta, phi, alpha):
+    def __init__(self, theta: float, phi: float, alpha: float):
         """
         Args:
         theta (float): Polar angle of axis on the Bloch sphere.
@@ -174,7 +175,7 @@ class RotationGate(Gate):
         self.phi = phi
         self.alpha = alpha
     
-    def get_rotation_axis(self):
+    def get_rotation_axis(self) -> tuple[float]:
         """
         Reads the rotation axis as a tuple(theta, phi). Equivalent to a point (theta, phi) on the Bloch sphere.
 
@@ -184,7 +185,7 @@ class RotationGate(Gate):
 
         return (self.theta, self.phi)
     
-    def get_rotation_angle(self):
+    def get_rotation_angle(self) -> float:
         """
         Reads the rotation angle around the axis (theta, phi).
 
@@ -199,7 +200,7 @@ class RxGate(RotationGate):
     Rotation with specified angle along the x axis.
     """
     
-    def __init__(self, alpha):
+    def __init__(self, alpha: float):
         """
         Initiates an X-rotation.
 
@@ -214,7 +215,7 @@ class RyGate(RotationGate):
     Rotation with specified angle along the y axis.
     """
     
-    def __init__(self, alpha):
+    def __init__(self, alpha: float):
         """
         Initiates an Y-rotation.
 
@@ -229,7 +230,7 @@ class RzGate(RotationGate):
     Rotation with specified angle along the z axis.
     """
     
-    def __init__(self, alpha):
+    def __init__(self, alpha: float):
         """
         Initiates an Z-rotation.
 
@@ -249,7 +250,7 @@ class PhaseGate(Gate):
         phase (float): The phase of the phase gate.
     """
 
-    def __init__(self, phase):
+    def __init__(self, phase: float):
         """
         Initiates the attributes of the phase gate.
 
@@ -262,7 +263,7 @@ class PhaseGate(Gate):
         super().__init__(num_qubits, array)
         self.phase = phase
 
-    def get_phase(self):
+    def get_phase(self) -> float:
         """
         Reads the phase of the phase gate.
 
@@ -272,7 +273,7 @@ class PhaseGate(Gate):
 
         return self.phase
 
-    def set_phase(self, new_phase):
+    def set_phase(self, new_phase: float):
         """
         Sets a new phase for the phase gate (e.g. for a phase gate with a variable input phase).
 
@@ -300,7 +301,7 @@ class ControlledGate2(Gate):
         control (int): If 1, the control is the first qubit. If 2, the control is the second qubit.
     """
 
-    def __init__(self, control, gate1):
+    def __init__(self, control: int, gate1: Gate):
         
         """
         Initiates the attributes of the controlled gate.
@@ -322,7 +323,7 @@ class ControlledGate2(Gate):
         self.control = control
         self.target_gate = gate1
 
-    def get_control(self):
+    def get_control(self) -> int:
         """
         Reads the position of the control qubit.
 
@@ -331,7 +332,7 @@ class ControlledGate2(Gate):
         """
         return self.control
 
-    def get_target_gate(self):
+    def get_target_gate(self) -> Gate:
         """
         Reads a copy of the target gate.
 
@@ -350,7 +351,7 @@ class CNOTGate2(ControlledGate2):
     This is equivalent to "controlled_gate2(X_gate, control)".
     """
 
-    def __init__(self, control):
+    def __init__(self, control: int):
         """
         Initiates the attributes of the CNOT gate.
 
@@ -367,7 +368,7 @@ class CPhaseGate2(ControlledGate2):
     This is equivalent to "controlled_gate2(X_gate, control)".
     """
 
-    def __init__(self, phase):
+    def __init__(self, phase: float):
         """
         Initiates the attributes of the controlled phase gate.
 
@@ -379,7 +380,7 @@ class CPhaseGate2(ControlledGate2):
         self.target_phase = phase
 
     
-    def get_target_phase(self):
+    def get_target_phase(self) -> float:
         """
         Reads the phase of the controlled phase gate.
 
@@ -687,7 +688,7 @@ class FTGate2(Gate):
 #   - tensorprod(gate_list).
 
 
-def create_gate(num_qubits, array):
+def create_gate(num_qubits: int, array: ArrayLike) -> Gate:
     """
     Creates a customised gate U. It needs to be unitary or scalable to unitary, in which case it is automatically scaled to a unitary matrix.
 
@@ -723,7 +724,7 @@ def create_gate(num_qubits, array):
     
     return gate
 
-def tensorprod(gate_list):
+def tensorprod(gate_list: list[Gate]) -> Gate:
     """
     Calculates the tensor product of gates from a list.
 
