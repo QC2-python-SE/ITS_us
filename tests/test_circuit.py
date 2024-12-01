@@ -101,7 +101,7 @@ def test_run_two_qubit_two_wires():
 
     """
     state_to_check = States(N=2, state=np.array([0, 0, 0, 1]))
-    state_init = States(N=1, state=np.array([0, 0, 1, 0]))
+    state_init = States(N=2, state=np.array([0, 0, 1, 0]))
     circuit = Circuits(N_wires=2, state_init=state_init)
     CNOT = CNOTGate2(control=1)
     circuit.add_two_qubit_gate(CNOT, [0, 1])
@@ -120,7 +120,7 @@ def test_prepare_bell():
     state_to_check = PhiPlus()
     H_gate = HGate()
     CNOT = CNOTGate2(control=1)
-    state_init = States(N=1, state=np.array([1, 0, 0, 0]))
+    state_init = States(N=2, state=np.array([1, 0, 0, 0]))
     circuit = Circuits(N_wires=2, state_init=state_init)
 
     circuit.add_single_qubit_gate(H_gate, 0)
