@@ -1,5 +1,5 @@
 circuits module
-===============
+==================
 
 .. automodule:: circuits
    :members:
