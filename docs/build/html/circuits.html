@@ -14,7 +14,7 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=837179f8"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -57,6 +57,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#circuits.Circuits.add_single_qubit_gate"><code class="docutils literal notranslate"><span class="pre">Circuits.add_single_qubit_gate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#circuits.Circuits.add_two_qubit_gate"><code class="docutils literal notranslate"><span class="pre">Circuits.add_two_qubit_gate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#circuits.Circuits.get_gates"><code class="docutils literal notranslate"><span class="pre">Circuits.get_gates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#circuits.Circuits.get_state_final"><code class="docutils literal notranslate"><span class="pre">Circuits.get_state_final()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#circuits.Circuits.get_state_init"><code class="docutils literal notranslate"><span class="pre">Circuits.get_state_init()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#circuits.Circuits.measure_qubits"><code class="docutils literal notranslate"><span class="pre">Circuits.measure_qubits()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#circuits.Circuits.run_circuit"><code class="docutils literal notranslate"><span class="pre">Circuits.run_circuit()</span></code></a></li>
@@ -71,8 +72,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="bell_circuit.html">Placeholder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="states_example.html">Examples of the application of states.py script.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bell_circuit.html">Bell circuit</a></li>
 </ul>
 
         </div>
@@ -116,6 +117,7 @@
 <li><p>gates</p></li>
 <li><p>states</p></li>
 <li><p>copy</p></li>
+<li><p>random</p></li>
 </ul>
 </section>
 </section>
@@ -193,6 +195,22 @@ wire the circuit is on and gate is the Gate object</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="circuits.Circuits.get_state_final">
+<span class="sig-name descname"><span class="pre">get_state_final</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#circuits.Circuits.get_state_final" title="Link to this definition"></a></dt>
+<dd><p>Returns the final quantum state after running circuit. If the
+circuit has not been called, returns a NoneType with a warning message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The final state as a numpy array
+NoneType: If the circuit has not been run</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="circuits.Circuits.get_state_init">
 <span class="sig-name descname"><span class="pre">get_state_init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#circuits.Circuits.get_state_init" title="Link to this definition"></a></dt>
 <dd><p>Returns the initial quantum state of the circuit as an array</p>
@@ -208,8 +226,28 @@ wire the circuit is on and gate is the Gate object</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="circuits.Circuits.measure_qubits">
-<span class="sig-name descname"><span class="pre">measure_qubits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#circuits.Circuits.measure_qubits" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">measure_qubits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_outcome</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#circuits.Circuits.measure_qubits" title="Link to this definition"></a></dt>
+<dd><p>Applies a projection operator in the computational Z basis to the final state with
+a probability distribution constructed from the final states’ amplitudes, also
+in the Z basis. Collapses the final state into a basis state of the computational
+basis, overwriting it and destroying its quantum information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seed</strong> (<em>int</em>) – seed to fix probability distribution</p></li>
+<li><p><strong>print</strong> (<em>Bool</em>) – print the measurement outcome</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The final projected state. Calling this function overwrites the
+final state post-application of the quantum circuit. If run_circuit has not
+been called, then a NoneType is returned.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="states.html#states.States" title="states.States">States</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="circuits.Circuits.run_circuit">

@@ -18,9 +18,9 @@ Dependencies:
 
 import numpy as np
 from states import *
-from gates import Gate
+from gates import Gate, HGate, CNOTGate2
 from copy import deepcopy
-from random import choices, seed as randseed
+from random import Random
 
 
 class Circuits:
@@ -159,7 +159,7 @@ class Circuits:
         self.state_final = States(state=state_array, N=self.N_wires)
         return self.state_final
 
-    def measure_qubits(self, seed: int = None):
+    def measure_qubits(self, seed: int = None, print_outcome=False):
         """
         Applies a projection operator in the computational Z basis to the final state with
         a probability distribution constructed from the final states' amplitudes, also
@@ -167,18 +167,22 @@ class Circuits:
         basis, overwriting it and destroying its quantum information.
 
         Args:
-            key (int): key to fix probability distribution
-
+            seed (int): seed to fix probability distribution
+            print (Bool): print the measurement outcome
         Returns:
-        
+
             States: The final projected state. Calling this function overwrites the
             final state post-application of the quantum circuit. If run_circuit has not
             been called, then a NoneType is returned.
 
         """
-        if seed is not None:
-            randseed(seed)
-        
+        if seed is None:
+            rng = Random()
+
+        else:
+            rng = Random()
+            rng.seed(seed)
+
         # return NoneType
         if not self.circuit_ran:
             print("The circuit has not been run - no measurement performed")
@@ -191,11 +195,19 @@ class Circuits:
 
         # construct binary outcome list and randomly choose the outcome
         outcome_sequence = np.arange(2**self.N_wires)
-        outcome = choices(outcome_sequence, weights=distribution, k=1)[0] #choices returns an array...
+        outcome = rng.choices(outcome_sequence, weights=distribution, k=1)[
+            0
+        ]  # choices returns an array...
 
         # construct the final state array
         state_array = np.zeros(2**self.N_wires)
         state_array[outcome] = 1
-        print(f"Final measurement outcome is {format(outcome, 'b')}")
+
+        if print_outcome:
+            print(f"Final measurement outcome is {str(bin(outcome)[2:]).zfill(self.N_wires)}")
+
         self.state_final = States(N=self.N_wires, state=state_array)
+
+        # reset seed post measurement
+
         return self.state_final

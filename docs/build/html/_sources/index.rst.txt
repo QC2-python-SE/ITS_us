@@ -18,5 +18,5 @@ Welcome to the documentation!
    :maxdepth: 2
    :caption: Examples
 
-   bell_circuit.ipynb
    states_example.ipynb
+   bell_circuit.ipynb

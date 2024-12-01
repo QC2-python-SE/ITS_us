@@ -9,6 +9,7 @@ from gates import *
 from circuits import Circuits
 import random
 
+
 def test_add_single_gates():
     """
     Test to ensure that the gate added to the Gates.gates list of tuples is added correctly
@@ -101,7 +102,7 @@ def test_run_two_qubit_two_wires():
 
     """
     state_to_check = States(N=2, state=np.array([0, 0, 0, 1]))
-    state_init = States(N=1, state=np.array([0, 0, 1, 0]))
+    state_init = States(N=2, state=np.array([0, 0, 1, 0]))
     circuit = Circuits(N_wires=2, state_init=state_init)
     CNOT = CNOTGate2(control=1)
     circuit.add_two_qubit_gate(CNOT, [0, 1])
@@ -120,7 +121,7 @@ def test_prepare_bell():
     state_to_check = PhiPlus()
     H_gate = HGate()
     CNOT = CNOTGate2(control=1)
-    state_init = States(N=1, state=np.array([1, 0, 0, 0]))
+    state_init = States(N=2, state=np.array([1, 0, 0, 0]))
     circuit = Circuits(N_wires=2, state_init=state_init)
 
     circuit.add_single_qubit_gate(H_gate, 0)
@@ -146,14 +147,13 @@ def test_runcircuit_identity():
     """
     circuit = Circuits()
     circuit.run_circuit()  # passing no gates to the circuit
-    state_tocheck = np.array([1, 0]).reshape(-1,1)
-    assert (circuit.get_state_final()==state_tocheck).all()
+    state_tocheck = np.array([1, 0]).reshape(-1, 1)
+    assert (circuit.get_state_final() == state_tocheck).all()
 
-    circuit = Circuits(N_wires=2, state_init=States(N=2, state=tp([1,0],[1,0])))
+    circuit = Circuits(N_wires=2, state_init=States(N=2, state=tp([1, 0], [1, 0])))
     circuit.run_circuit()
-    state_tocheck = np.array([1,0,0,0]).reshape(-1,1)
-    assert (circuit.get_state_final() ==state_tocheck).all()
-
+    state_tocheck = np.array([1, 0, 0, 0]).reshape(-1, 1)
+    assert (circuit.get_state_final() == state_tocheck).all()
 
 
 def test_circuit_ran_flag():
@@ -165,17 +165,18 @@ def test_circuit_ran_flag():
     circuit.run_circuit()
     assert circuit.circuit_ran == True
 
+
 def test_measurement_collapse_one_wire():
     """
     Asserts the final measurement outcome after appying X|0>=|1>
     """
-    #construct initial states
+    # construct initial states
     state_init = States()
-    state_tocheck = States(1, np.array([0,1]))
-    #construct circuit
+    state_tocheck = States(1, np.array([0, 1]))
+    # construct circuit
     circuit = Circuits()
     circuit.add_single_qubit_gate(XGate())
-    #run and measure
+    # run and measure
     circuit.run_circuit()
     outcome = circuit.measure_qubits()
     assert (state_tocheck.get_state() == outcome.get_state()).all()
@@ -185,40 +186,39 @@ def test_measurement_collapse_two_wires():
     """
     Asserts the final measurement outcome after appying CNOT|11>=|10> is |10>
     """
-    #construct initial state
-    state_init = States(2, np.array([0,0,0,1]))
-    state_tocheck = States(2, np.array([0,0,1,0]))
-    #construct circuit
+    # construct initial state
+    state_init = States(2, np.array([0, 0, 0, 1]))
+    state_tocheck = States(2, np.array([0, 0, 1, 0]))
+    # construct circuit
     circuit = Circuits(N_wires=2, state_init=state_init)
-    circuit.add_two_qubit_gate(CNOTGate2(control=1), [0,1])
-    #run and measure
+    circuit.add_two_qubit_gate(CNOTGate2(control=1), [0, 1])
+    # run and measure
     circuit.run_circuit()
     outcome = circuit.measure_qubits()
     assert (state_tocheck.get_state() == outcome.get_state()).all()
 
 
 def test_seed():
-
     """
     Asserts random seed can be set for measurement outcomes
 
     Runs circuit H|0> = |+> gives the same measurement outcome for a particular seed
-    
+
     """
     seed = 1
-    
-    #construct circuit
+
+    # construct circuit
     circuit = Circuits()
     circuit.add_single_qubit_gate(HGate())
 
     circuit.run_circuit()
     state_init = circuit.measure_qubits(seed=seed).get_state()
-    
-    #run 100 shots with the same seed to ensure the outcome is identical
-    
+
+    # run 100 shots with the same seed to ensure the outcome is identical
+
     for i in range(100):
         circuit = Circuits()
         circuit.add_single_qubit_gate(HGate())
         circuit.run_circuit()
         state_tocheck = circuit.measure_qubits(seed=seed).get_state()
-        assert (state_init==state_tocheck).all()
+        assert (state_init == state_tocheck).all()
