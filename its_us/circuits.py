@@ -17,8 +17,8 @@ Dependencies:
 """
 
 import numpy as np
-from states import *
-from gates import Gate, HGate, CNOTGate2
+from its_us.states import *
+from its_us.gates import Gate, HGate, CNOTGate2
 from copy import deepcopy
 from random import Random
 

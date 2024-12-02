@@ -4,9 +4,9 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import numpy as np
-from states import *
-from gates import *
-from circuits import Circuits
+from its_us.states import *
+from its_us.gates import *
+from its_us.circuits import Circuits
 import random
 
 
