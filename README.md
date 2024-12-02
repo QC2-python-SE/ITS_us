@@ -23,7 +23,7 @@ Also available in HTML form in the `docs/build/` folder
 The latest version of ITS_us can be installed via cloning this repository:
 
 ```bash
-git clone https://github.com/QC2-python-SE/ITS_us/
+pip install ITS-us==1.0.0
 ```
 Complete Documentation may be found in HTML form in the `docs/build/` folder
 
