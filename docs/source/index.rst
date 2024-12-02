@@ -6,7 +6,8 @@
 ITS_us documentation
 ====================
 
-Welcome to the documentation!
+Welcome to the ITS_us documentation! This is the landing page. Below you can see the
+documentation of the three main attributes, as well as some examples on how to use each module
 
 .. toctree::
    :maxdepth: 2
@@ -15,8 +16,10 @@ Welcome to the documentation!
    modules
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Examples
 
    states_example.ipynb
+   gates_example.ipynb
    bell_circuit.ipynb
+
