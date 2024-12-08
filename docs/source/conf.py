@@ -16,7 +16,7 @@ release = '0.0'
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath('../../its_us'))
 html_theme = 'sphinx_rtd_theme'
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'nbsphinx', 'sphinx.ext.mathjax']
 
